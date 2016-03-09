@@ -1,0 +1,2 @@
+
+INSERT INTO `vondrm12`.`car` (`id`, `name`, `volume`, `power`, `mileage`, `manufacture_year`, `doors`, `airbags`, `seats`, `gears`, `top_speed`, `acceleration`) VALUES (NULL, 'Škoda Superb', '1800', '132', '6', '2016', '4', '8', '5', '7', '225', '7.5');
