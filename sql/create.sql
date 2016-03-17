@@ -20,6 +20,6 @@ CREATE TABLE `car` (
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
-  AUTO_INCREMENT = 7
+  AUTO_INCREMENT = 1
   DEFAULT CHARSET = utf8
   COMMENT = 'tabulka s vozidly'
