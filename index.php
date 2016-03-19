@@ -6,4 +6,6 @@
  * Time: 22:53
  */
 
+require_once 'autoload.php';
+
 echo "Ahoj ja jsem zmrd ze Symfony";
