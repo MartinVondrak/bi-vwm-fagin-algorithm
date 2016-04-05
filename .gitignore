@@ -1,5 +1,8 @@
 # Ignore files of PhpStorm project
 .idea
 
-#Ignore test file
+# Ignore test file
 test.php
+
+# Ignore library folder
+vendor
