@@ -51,6 +51,16 @@ class Database {
     }
 
     /**
+     * Vlozi objekt Car do databaze.
+     *
+     * @param Car $car
+     * @return bool
+     */
+    public function insertCar(Car $car) {
+        return true;
+    }
+
+    /**
      * Vrati pripojeni do DB.
      *
      * @return PDO
