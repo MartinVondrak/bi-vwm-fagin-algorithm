@@ -37,6 +37,7 @@ class Database {
     }
 
     /**
+     * Vrati objekt Car pro id dane parametrem.
      *
      * @param int $id
      * @return Car

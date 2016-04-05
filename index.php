@@ -8,4 +8,4 @@
 
 require_once 'autoload.php';
 
-echo "Ahoj ja jsem zmrd ze Symfony";
+echo "Ahoj ja jsem smajlik ze Symfony";
