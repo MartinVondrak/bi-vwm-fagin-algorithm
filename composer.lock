@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "980269fefe6329796c73a3f216c702a5",
-    "content-hash": "0472e7f8fdde8db6da8f2b0f2f758a70",
+    "hash": "c1f500469a760d4740ccf7672f52a79d",
+    "content-hash": "57847ed5c235506e13c5daa8e0fba512",
     "packages": [
         {
             "name": "twbs/bootstrap",
