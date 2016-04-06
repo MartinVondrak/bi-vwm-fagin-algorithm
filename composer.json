@@ -1,5 +1,7 @@
 {
-  "name": "vwm/fagin",
+  "name": "vondrm12/bi-vwm-fagin-algorithm",
+  "description": "Semestral project for subject BI-VWM (Searching Web and Multimedia Databases). The application implements Fagin top(k) algorithm.",
+  "license": "proprietary",
   "require": {
     "twig/twig": "~1.0",
     "twbs/bootstrap": "~3.0"
