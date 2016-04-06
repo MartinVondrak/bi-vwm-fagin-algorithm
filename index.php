@@ -8,4 +8,4 @@
 
 require_once 'autoload.php';
 
-echo "Ahoj ja jsem smajlik ze Symfony";
+echo $twig->render("index.html.twig");
