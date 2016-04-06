@@ -2,4 +2,24 @@
 
 <p>This is test file.</p>
 
-<h2>{{ car.name }}</h2>
+{% for car in cars %}
+  <section>
+    <h2>{{ car.name }}</h2>
+    <dl>
+      <dt>V-max</dt>
+      <dd>{{ car.topspeed }}</dd>
+      <dt>Volume</dt>
+      <dd>{{ car.volume }}</dd>
+      <dt>Power</dt>
+      <dd>{{ car.power }}</dd>
+      <dt>Mileage</dt>
+      <dd>{{ car.mileage }}</dd>
+      <dt>Manufacture year</dt>
+      <dd>{{ car.manufactureyear }}</dd>
+      <dt>Acceleration</dt>
+      <dd>{{ car.acceleration }}</dd>
+      <dt>Price</dt>
+      <dd>{{ car.price }}</dd>
+    </dl>
+  </section>
+{% endfor %}

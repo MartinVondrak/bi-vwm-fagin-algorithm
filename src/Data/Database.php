@@ -51,6 +51,19 @@ class Database {
     }
 
     /**
+     * Vrati pole vsech objektu Car v databazi.
+     *
+     * @return Car[]
+     */
+    public function fetchAllCars() {
+        $query = $this->database->prepare('SELECT * FROM `car`');
+        $query->setFetchMode(PDO::FETCH_CLASS, 'Fagin\Data\Car');
+        $query->execute();
+        $cars = $query->fetchAll();
+        return $cars;
+    }
+
+    /**
      * Vlozi objekt Car do databaze.
      *
      * @param Car $car
