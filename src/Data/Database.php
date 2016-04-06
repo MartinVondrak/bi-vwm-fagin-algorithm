@@ -65,12 +65,33 @@ class Database {
 
     /**
      * Vlozi objekt Car do databaze.
+     * Vraci ID nove vlozeneho auta nebo null pri neuspechu.
      *
      * @param Car $car
-     * @return bool
+     * @return int|null
      */
     public function insertCar(Car $car) {
-        return true;
+        if ($car == null) {
+            return null;
+        }
+
+        $query = $this->database->prepare('INSERT INTO `car` (`name`, `volume`, `power`, `mileage`, `manufacture_year`, `top_speed`, `acceleration`, `price`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+        $params = array(
+            $car->getName(),
+            $car->getVolume(),
+            $car->getPower(),
+            $car->getMileage(),
+            $car->getManufactureYear(),
+            $car->getTopSpeed(),
+            $car->getAcceleration(),
+            $car->getPrice()
+        );
+
+        if (!$query->execute($params)) {
+            return null;
+        }
+
+        return $this->database->lastInsertId();
     }
 
     /**
