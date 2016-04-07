@@ -5,8 +5,10 @@
     <meta name="description" content="Semestral project for subject BI-VWM (Searching Web and Multimedia Databases). The application implements Fagin top(k) algorithm.">
     <meta name="author" content="Martin Vondrak, Michal Pech">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../../vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
-    <script src="../../vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../vendor/twbs/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../src/Views/css/custom.css">
+    <script src="../../vendor/twbs/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <title>{% block title %}Vítejte!{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
 </head>
@@ -14,5 +16,6 @@
 {% include "menu.html.twig" %}
 {% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}
+{% include "footer.html.twig" %}
 </body>
 </html>

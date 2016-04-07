@@ -1,0 +1,73 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:900,400,200);
+
+* {
+    font-family: 'Raleway', sans-serif;
+    color: #001a72;
+}
+
+.navbar-default {
+    height: 70px;
+    margin: 0;
+    vertical-align: middle;
+    background-color: #ffffff;
+}
+
+.navbar-default .container div {
+    margin-top: 10px;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:visited {
+    font-size: 24px;
+    font-weight: 200;
+    color: #001a72;
+}
+
+.navbar-default .navbar-toggle, .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color: #001a72;
+    border: 0;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #ffffff;
+}
+
+.nav-pills a {
+    color: #001a72;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover {
+    background-color: #001a72;
+    color: #ffffff;
+}
+
+.page-header.main-page {
+    height: 500px;
+    margin: 0;
+    padding: 160px 20px 0 20px;
+    text-align: center;
+    background: url("../images/header.jpg") top center no-repeat;
+}
+
+.page-header.main-page h1 {
+    font-size: 80px;
+    font-weight: 900;
+    color: #ffffff;
+}
+
+.page-header.main-page p {
+    font-size: 24px;
+    font-weight: 200;
+    color: #ffffff;
+}
+
+.container h1 {
+    font-size: 36px;
+    font-weight: 200;
+    text-align: center;
+}
+
+.footer .container p {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 12px;
+}
