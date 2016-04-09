@@ -31,6 +31,10 @@
     background-color: #ffffff;
 }
 
+div#menu.navbar-collapse.collapse, div#menu.navbar-collapse.collapse.in {
+    background-color: #ffffff;
+}
+
 .nav-pills a {
     color: #001a72;
 }

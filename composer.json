@@ -4,7 +4,8 @@
   "license": "proprietary",
   "require": {
     "twig/twig": "~1.0",
-    "twbs/bootstrap": "~3.0"
+    "twbs/bootstrap": "~3.0",
+    "components/jquery": "~1.12"
   },
   "autoload": {
     "psr-4": {
