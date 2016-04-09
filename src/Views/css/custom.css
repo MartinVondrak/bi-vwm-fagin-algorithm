@@ -17,7 +17,7 @@
 }
 
 .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:visited {
-    font-size: 24px;
+    font-size: 30px;
     font-weight: 200;
     color: #001a72;
 }
@@ -35,17 +35,23 @@
     color: #001a72;
 }
 
-.nav-pills>li.active>a, .nav-pills>li.active>a:hover {
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
     background-color: #001a72;
     color: #ffffff;
 }
 
+.page-header p {
+    font-size: 24px;
+    font-weight: 200;
+    color: #ffffff;
+}
+
 .page-header.main-page {
-    height: 500px;
+    height: 570px;
     margin: 0;
-    padding: 160px 20px 0 20px;
+    padding: 210px 20px 0 20px;
     text-align: center;
-    background: url("../images/header.jpg") top center no-repeat;
+    background: url("../images/header_570px.jpg") top center no-repeat;
 }
 
 .page-header.main-page h1 {
@@ -54,10 +60,12 @@
     color: #ffffff;
 }
 
-.page-header.main-page p {
-    font-size: 24px;
-    font-weight: 200;
-    color: #ffffff;
+.page-header.other-page {
+    height: 220px;
+    margin: 0;
+    padding: 130px 20px 0 20px;
+    text-align: center;
+    background: url("../images/header_220px.jpg") top center no-repeat;
 }
 
 .container h1 {
@@ -70,4 +78,11 @@
     margin-top: 20px;
     text-align: center;
     font-size: 12px;
+}
+
+.table-bordered thead tr th {
+    color: #ffffff;
+    font-weight: 400;
+    border: 0;
+    background-color: #001a72;
 }

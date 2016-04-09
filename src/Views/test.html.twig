@@ -1,33 +1,36 @@
 {% extends "base.html.twig" %}
-{% block title %}HELLO WORLD!{% endblock %}
+{% block title %}Test výpis!{% endblock %}
 
 {% block body %}
+  {% include "header.html.twig" %}
 
-<div class="container">
-<h1>HELLO WORLD!</h1>
+  <div class="container">
+    <h1>Test výpis!</h1>
+    <p>Testovací výpis.</p>
 
-<p>This is test file.</p>
-
-{% for car in cars %}
-  <section>
-    <h2>{{ car.name }}</h2>
-    <dl>
-      <dt>V-max</dt>
-      <dd>{{ car.topspeed }}</dd>
-      <dt>Volume</dt>
-      <dd>{{ car.volume }}</dd>
-      <dt>Power</dt>
-      <dd>{{ car.power }}</dd>
-      <dt>Mileage</dt>
-      <dd>{{ car.mileage }}</dd>
-      <dt>Manufacture year</dt>
-      <dd>{{ car.manufactureyear }}</dd>
-      <dt>Acceleration</dt>
-      <dd>{{ car.acceleration }}</dd>
-      <dt>Price</dt>
-      <dd>{{ car.price }}</dd>
-    </dl>
-  </section>
-{% endfor %}
-</div>
+    <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Název</th><th>Obsah</th><th>Výkon</th><th>Tachometr</th><th>Rok výroby</th>
+          <th>Max. rychlost</th><th>Zrychlení</th><th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for car in cars %}
+        <tr>
+          <td>{{ car.name }}</td>
+          <td>{{ car.volume }} ccm</td>
+          <td>{{ car.power }} kW</td>
+          <td>{{ car.mileage }} km</td>
+          <td>{{ car.manufactureyear }}</td>
+          <td>{{ car.topspeed }} km/h</td>
+          <td>{{ car.acceleration }} s</td>
+          <td>{{ car.price }} Kč</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
 {% endblock %}
