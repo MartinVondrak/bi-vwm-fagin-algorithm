@@ -133,6 +133,32 @@ class Database {
     }
 
     /**
+     * Ulozi normalizovana data do prislusne tabulky a vrati true nebo false podle uspechu.
+     *
+     * @TODO neni mozna napsane uplne nejbezpecneji.
+     * @param $normalizedTable
+     * @param $param
+     * @return bool
+     * @throws InvalidParamException
+     */
+    public function saveNormalizedTable($normalizedTable, $param) {
+        if (!in_array($param, Car::PARAMS)) {
+            throw new InvalidParamException($param);
+        }
+        $table = 'car_' . $param;
+        $sql = 'INSERT INTO `' . $table . '` (`id`, `' . $param . '`) VALUES ';
+
+        foreach ($normalizedTable as $id => $row) {
+            $sql .= '(' . $id . ', ' . $row . '), ';
+        }
+
+        $sql = rtrim($sql, ", ");
+        var_dump($sql);
+        $query = $this->database->prepare($sql);
+        return $query->execute();
+    }
+
+    /**
      * Vrati pripojeni do DB.
      *
      * @return PDO

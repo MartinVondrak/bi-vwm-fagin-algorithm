@@ -41,12 +41,22 @@ class CarOperation {
         return $car_id;
     }
 
+    /**
+     * Normalizuje vsechny parametry vsech aut.
+     */
     public function normalize() {
         foreach (Car::PARAMS as $param) {
-            $this->normalizeParam($param);
+            var_dump($this->normalizeParam($param));
         }
     }
 
+    /**
+     * Normalizuje dany parametr pro vsechna auta.
+     *
+     * @param string $param
+     * @return bool
+     * @throws \Fagin\Exception\InvalidParamException
+     */
     private function normalizeParam($param) {
         $max = $this->database->getCarMaxParam($param);
         $min = $this->database->getCarMinParam($param);
@@ -56,18 +66,27 @@ class CarOperation {
         foreach ($cars as $car) {
             $value = $car->getParam($param);
             $normalizedValue = $this->normalizeValue($value, $param, $min, $max);
-            $normalizedTable[] = array('id' => $car->getId(), $param => $normalizedValue);
-            var_dump($normalizedTable);
+            $normalizedTable[$car->getId()] = $normalizedValue;
         }
 
-        return true;
+        return $this->database->saveNormalizedTable($normalizedTable, $param);
     }
 
+    /**
+     * Normalizuje danou hodnotu bud.
+     * Rozlisuje hodnoty podle prime a neprime umery.
+     *
+     * @param mixed  $value
+     * @param string $param
+     * @param mixed  $min
+     * @param mixed  $max
+     * @return float|int
+     */
     private function normalizeValue($value, $param, $min, $max) {
         $denominator = $max - $min;
 
         if ($denominator == 0) {
-            $denominator = 1;
+            return 1;
         }
 
         if ($param == Car::VOLUME or $param == Car::POWER or Car::TOP_SPEED) {
