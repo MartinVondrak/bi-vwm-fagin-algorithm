@@ -153,7 +153,6 @@ class Database {
         }
 
         $sql = rtrim($sql, ", ");
-        var_dump($sql);
         $query = $this->database->prepare($sql);
         return $query->execute();
     }

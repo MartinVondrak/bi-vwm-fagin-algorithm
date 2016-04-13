@@ -11,6 +11,7 @@ namespace Fagin\Service;
 
 use Fagin\Data\Car;
 use Fagin\Data\Database;
+use Fagin\Exception\NormalizationErrorException;
 
 class CarOperation {
 
@@ -46,7 +47,9 @@ class CarOperation {
      */
     public function normalize() {
         foreach (Car::PARAMS as $param) {
-            var_dump($this->normalizeParam($param));
+            if (!$this->normalizeParam($param)) {
+                throw new NormalizationErrorException($param);
+            }
         }
     }
 
