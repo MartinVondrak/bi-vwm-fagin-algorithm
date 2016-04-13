@@ -8,4 +8,14 @@
 
 require_once 'autoload.php';
 
-echo $twig->render("index.html.twig");
+use Fagin\Controller\TestController;
+
+$uri = explode('/',$_SERVER['REQUEST_URI'] );
+
+if ($uri[1] == "test") {
+    $controller = new TestController($twig);
+    echo $controller->testAction();
+}
+else {
+    echo $twig->render("index.html.twig");
+}
