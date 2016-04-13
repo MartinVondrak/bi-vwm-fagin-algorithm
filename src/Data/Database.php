@@ -11,17 +11,19 @@ namespace Fagin\Data;
 
 use PDO;
 use PDOException;
+use Fagin\Exception\InvalidParamException;
 
 class Database {
+
     /** @var  PDO */
     private $database;
 
     /**
-     * Database constructor.
+     * Database konstruktor.
      */
     public function __construct() {
         $ini_file = dirname(__FILE__) . '/../../config.ini';
-        $params = $this->paramsFromIniFile($ini_file);
+        $params = Database::paramsFromIniFile($ini_file);
 
         try {
             $this->database = new PDO(
@@ -61,6 +63,42 @@ class Database {
         $query->execute();
         $cars = $query->fetchAll();
         return $cars;
+    }
+
+    /**
+     * Vrati auto s nejvetsim zadanym parametrem.
+     *
+     * @param string $param
+     * @return mixed
+     * @throws InvalidParamException
+     */
+    public function getCarMaxParam($param) {
+        if (!in_array($param, Car::PARAMS)) {
+            throw new InvalidParamException($param);
+        }
+
+        $query = $this->database->prepare('SELECT * FROM `car` ORDER BY `' . $param . '` DESC LIMIT 1');
+        $query->setFetchMode(PDO::FETCH_ASSOC);
+        $query->execute();
+        $car = $query->fetch();
+        return $car[$param];
+    }
+
+    /**
+     * @param string $param
+     * @return mixed
+     * @throws InvalidParamException
+     */
+    public function getCarMinParam($param) {
+        if (!in_array($param, Car::PARAMS)) {
+            throw new InvalidParamException($param);
+        }
+
+        $query = $this->database->prepare('SELECT * FROM `car` ORDER BY `' . $param . '` ASC LIMIT 1');
+        $query->setFetchMode(PDO::FETCH_ASSOC);
+        $query->execute();
+        $car = $query->fetch();
+        return $car[$param];
     }
 
     /**
@@ -109,7 +147,7 @@ class Database {
      * @param string $ini_file
      * @return string
      */
-    private function paramsFromIniFile($ini_file) {
+    private static function paramsFromIniFile($ini_file) {
         $config = parse_ini_file($ini_file, true);
         $conn_string = $config['database']['type'] . ':';
         $conn_string .= 'host=' . $config['database']['host'] . ';';

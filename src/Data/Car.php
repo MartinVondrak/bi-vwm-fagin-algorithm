@@ -9,7 +9,28 @@
 namespace Fagin\Data;
 
 
+use Fagin\Exception\InvalidParamException;
+
 class Car {
+
+    const VOLUME = 'volume';
+    const POWER = 'power';
+    const MILEAGE = 'mileage';
+    const MANUFACTURE_YEAR = 'manufacture_year';
+    const TOP_SPEED = 'top_speed';
+    const ACCELERATION = 'acceleration';
+    const PRICE = 'price';
+
+    /** @var array PARAMS */
+    const PARAMS = array(
+        self::VOLUME,
+        self::POWER,
+        self::MILEAGE,
+        self::MANUFACTURE_YEAR,
+        self::TOP_SPEED,
+        self::ACCELERATION,
+        self::PRICE
+    );
 
     /** @var int $id */
     private $id;
@@ -173,5 +194,17 @@ class Car {
         return $this;
     }
 
+    /**
+     * @param string $param
+     * @return mixed
+     * @throws InvalidParamException
+     */
+    public function getParam($param) {
+        if (!in_array($param, self::PARAMS)) {
+            throw new InvalidParamException($param);
+        }
+
+        return $this->$param;
+    }
 
 }
