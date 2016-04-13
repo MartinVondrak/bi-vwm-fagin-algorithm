@@ -1,5 +1,11 @@
 {% block body %}
 
+    <script>
+        $(document).ready(function() {
+            $('a[href="' + this.location.pathname + '"]').parent().addClass('active');
+        });
+    </script>
+
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container" role="navigation">
             <div class="navbar-header">
@@ -12,10 +18,11 @@
             </div>
             <div class="collapse navbar-collapse" id="menu">
             	<ul class="nav nav-pills navbar-right">
-            	    <li role="presentation" class="active"><a href="#">Domu</a></li>
+            	    <li role="presentation"><a href="/">Domu</a></li>
             	    <li role="presentation"><a href="#">Vyhledat</a></li>
             	    <li role="presentation"><a href="#">Vložit automobil</a></li>
-            	    <li role="presentation"><a href="#">O projektu</a></li>
+                    <li role="presentation"><a href="#">O projektu</a></li>
+            	    <li role="presentation"><a href="/test/">Test</a></li>
             	</ul>
             </div>
         </div>
