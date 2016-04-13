@@ -44,6 +44,8 @@ class CarOperation {
 
     /**
      * Normalizuje vsechny parametry vsech aut.
+     *
+     * @throws NormalizationErrorException
      */
     public function normalize() {
         foreach (Car::PARAMS as $param) {
@@ -76,8 +78,7 @@ class CarOperation {
     }
 
     /**
-     * Normalizuje danou hodnotu bud.
-     * Rozlisuje hodnoty podle prime a neprime umery.
+     * Normalizuje danou hodnotu, rozlisuje hodnoty podle prime a neprime umery.
      *
      * @param mixed  $value
      * @param string $param
@@ -92,10 +93,10 @@ class CarOperation {
             return 1;
         }
 
-        if ($param == Car::VOLUME or $param == Car::POWER or Car::TOP_SPEED) {
-            return 1 - ($max - $value) / $denominator;
-        } else {
+        if ($param == Car::MILEAGE or $param == Car::ACCELERATION or $param == Car::PRICE) {
             return ($max - $value) / $denominator;
+        } else {
+            return 1 - ($max - $value) / $denominator;
         }
     }
 }

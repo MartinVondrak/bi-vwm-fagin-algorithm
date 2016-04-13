@@ -145,7 +145,11 @@ class Database {
         if (!in_array($param, Car::PARAMS)) {
             throw new InvalidParamException($param);
         }
+
+        var_dump($param);
+
         $table = 'car_' . $param;
+        $this->database->query('TRUNCATE TABLE `' . $table . '`');
         $sql = 'INSERT INTO `' . $table . '` (`id`, `' . $param . '`) VALUES ';
 
         foreach ($normalizedTable as $id => $row) {
