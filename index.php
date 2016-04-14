@@ -9,23 +9,43 @@
 require_once 'autoload.php';
 
 use Fagin\Controller\FaginController;
+use Fagin\Controller\StaticController;
 use Fagin\Controller\TestController;
 
-$uri = explode('/',$_SERVER['REQUEST_URI'],3 );
+$uri = explode('/',$_SERVER['REQUEST_URI'],4 );
 
-if ($uri[2] == NULL) {
-    if ($uri[1] == "test") {
-        $controller = new TestController($twig);
-        echo $controller->testAction();
-    }
-    elseif ($uri[1] == "vyhledat") {
-        $controller = new FaginController($twig);
-        echo $controller->findAction();
-    }
-    else {
+$faginController = new FaginController($twig);
+$staticController = new StaticController($twig);
+$testController = new TestController($twig);
+
+var_dump($uri);
+
+if (count($uri) == 2) {
+    if($uri[1] == NULL) {
         echo $twig->render("static/index.html.twig");
     }
 }
+elseif (count($uri) == 3) {
+    if ($uri[2] == NULL) {
+        if ($uri[1] == "test") {
+            echo $testController->testAction();
+        }
+        elseif ($uri[1] == "vyhledat") {
+            echo $faginController->findAction();
+        }
+        else {
+            echo $staticController->response(404);
+        }
+    }
+    else {
+        echo $staticController->response(404);
+    }
+}
 else {
-    echo $twig->render("index.html.twig");
+    if ($uri[1] == "car" && $uri[3] == NULL) {
+        echo $faginController->carDetailAction($uri[2]);
+    }
+    else {
+        echo $staticController->response(404);
+    }
 }

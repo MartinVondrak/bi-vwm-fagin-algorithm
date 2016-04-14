@@ -18,9 +18,15 @@ class FaginController extends Controller
     }
 
     public function carDetailAction($id) {
+        if(!is_numeric($id)) {
+            return $this->response(404);
+        }
         $operation = new CarOperation();
         $car = $operation->getCarById($id);
-
+        if ($car == NULL){
+            return $this->response(404);
+        }
+        return $this->render("fagin/car-detail.html.twig",array('car' => $car));
     }
 
 }

@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+{% block title %}Vyhledat{% endblock %}
+
+{% block body %}
+    {% include "layout/header.html.twig" %}
+
+    <div class="container">
+        <h1>{{ car.name }}</h1>
+        <p>Detail vozu</p>
+
+        <section>
+            <dl>
+                <dt>Volume</dt>
+                <dd>{{ car.volume }} ccm</dd>
+                <dt>Power</dt>
+                <dd>{{ car.power }} kW</dd>
+                <dt>Mileage</dt>
+                <dd>{{ car.mileage }} km</dd>
+                <dt>Manufacture year</dt>
+                <dd>{{ car.manufactureyear }}</dd>
+                <dt>V-max</dt>
+                <dd>{{ car.topspeed }} km/h</dd>
+                <dt>Acceleration</dt>
+                <dd>{{ car.acceleration }} s</dd>
+                <dt>Price</dt>
+                <dd>{{ car.price }} Kč</dd>
+            </dl>
+        </section>
+
+    </div>
+{% endblock %}
