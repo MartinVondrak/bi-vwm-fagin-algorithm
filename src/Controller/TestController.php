@@ -8,18 +8,18 @@
 
 namespace Fagin\Controller;
 
-use Fagin\Data\Database;
+use Fagin\Service\CarOperation;
 
 
 class TestController extends Controller
 {
     public function testAction() {
-        $db = new Database();
+        $operation = new CarOperation();
         $timeStart = microtime(true);
-        $cars = $db->fetchAllCars();
+        $cars = $operation->getAllCars();
         $timeEnd = microtime(true);
         $dbTime = $timeEnd - $timeStart;
 
-        return $this->render("test.html.twig", array('cars' => $cars, 'dbTime' => round($dbTime,4)));
+        return $this->render("test/test.html.twig", array('cars' => $cars, 'dbTime' => round($dbTime,4)));
     }
 }

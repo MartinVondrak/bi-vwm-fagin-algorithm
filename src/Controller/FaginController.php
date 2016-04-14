@@ -8,11 +8,19 @@
 
 namespace Fagin\Controller;
 
+use Fagin\Service\CarOperation;
+
 
 class FaginController extends Controller
 {
     public function findAction() {
-        return $this->render("find.html.twig",array('cars' => NULL));
+        return $this->render("fagin/find.html.twig",array('cars' => NULL));
+    }
+
+    public function carDetailAction($id) {
+        $operation = new CarOperation();
+        $car = $operation->getCarById($id);
+
     }
 
 }

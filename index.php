@@ -23,7 +23,7 @@ if ($uri[2] == NULL) {
         echo $controller->findAction();
     }
     else {
-        echo $twig->render("index.html.twig");
+        echo $twig->render("static/index.html.twig");
     }
 }
 else {

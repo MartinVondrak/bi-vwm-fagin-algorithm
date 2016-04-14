@@ -2,7 +2,7 @@
 {% block title %}Test výpis!{% endblock %}
 
 {% block body %}
-  {% include "header.html.twig" %}
+  {% include "layout/header.html.twig" %}
 
   <div class="container">
     <h1>Test výpis!</h1>
@@ -21,7 +21,7 @@
       <tbody>
         {% for car in cars %}
         <tr>
-          <td>{{ car.name }}</td>
+          <td><a href="/car/{{ car.id }}/">{{ car.name }}</a></td>
           <td>{{ car.volume }} ccm</td>
           <td>{{ car.power }} kW</td>
           <td>{{ car.mileage }} km</td>

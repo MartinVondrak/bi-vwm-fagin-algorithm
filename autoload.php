@@ -9,5 +9,5 @@
 require __DIR__ . '/vendor/autoload.php';
 
 Twig_Autoloader::register();
-$loader = new Twig_Loader_Filesystem(__DIR__ . '/src/Views');
+$loader = new Twig_Loader_Filesystem(__DIR__ . '/src/Resources/views');
 $twig = new Twig_Environment($loader);

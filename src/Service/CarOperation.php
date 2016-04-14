@@ -99,4 +99,21 @@ class CarOperation {
             return 1 - ($max - $value) / $denominator;
         }
     }
+
+    /**
+     * Vrati vsechny auta z databaze
+     * @return \Fagin\Data\Car[]
+     */
+    public function getAllCars() {
+        return $this->database->fetchAllCars();
+    }
+
+    /**
+     * Vrati auto z databaze dle zadaneho id
+     * @param $id
+     * @return \Fagin\Data\Car
+     */
+    public function getCarById($id) {
+        return $this->database->fetchCar($id);
+    }
 }
