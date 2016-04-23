@@ -99,6 +99,10 @@ div#menu.navbar-collapse.collapse, div#menu.navbar-collapse.collapse.in {
     text-align: left;
 }
 
+#result-table {
+    display: none;
+}
+
 .glyphicon-refresh-animate {
     -animation: spin .7s infinite linear;
     -webkit-animation: spin2 .7s infinite linear;

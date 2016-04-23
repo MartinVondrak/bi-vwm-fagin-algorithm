@@ -85,28 +85,29 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="button" id="sendForm" class="btn btn-default"><span id="glyph-loading"></span>Vyhledat</button>
+                        <button type="button" id="send-form" class="btn btn-default"><span id="glyph-loading"></span>Vyhledat</button>
                     </div>
                 </div>
             </div>
         </form>
 
-        <h1 id="result">Výsledky</h1>
-        <p>Testovací výpis.</p>
+        <div id="result-table">
 
-        <!-- <div class="alert alert-info" role="alert">Výpis databáze načten za {{ dbTime }} sekund.</div> -->
+            <h1 id="result">Výsledky</h1>
+            <div id="alert" role="alert"></div>
 
-        <div class="table-responsive">
-            <table class="table table-bordered" id="cars-table">
-                <thead>
-                <tr>
-                    <th>Název</th><th>Obsah</th><th>Výkon</th><th>Tachometr</th><th>Rok výroby</th>
-                    <th>Max. rychlost</th><th>Zrychlení</th><th>Cena</th>
-                </tr>
-                </thead>
-                <tbody id="cars-tbody">
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="cars-table">
+                    <thead>
+                    <tr>
+                        <th>Název</th><th>Obsah</th><th>Výkon</th><th>Tachometr</th><th>Rok výroby</th>
+                        <th>Max. rychlost</th><th>Zrychlení</th><th>Cena</th>
+                    </tr>
+                    </thead>
+                    <tbody id="cars-tbody">
+                    </tbody>
+                </table>
+            </div>
         </div>
 
 
@@ -116,12 +117,15 @@
     <script>
         $(document).ready(function () {
 
-            $("#sendForm").click(getData);
+            $("#send-form").click(getData);
 
             function getData() {
-                $("#sendForm").html("<span id='glyph-loading'></span> Vyhledávám...").addClass("disabled");
+                $("#send-form").html("<span id='glyph-loading'></span> Vyhledávám...").addClass("disabled");
                 $("#glyph-loading").addClass("glyphicon glyphicon-refresh glyphicon-refresh-animate");
                 $("#cars-tbody").empty();
+
+                var startTime = new Date().getTime();
+
                 var carsToInput = '';
                 $.getJSON("/api/get-all-cars/").done(function(data) {
                     $.each(data,function(index,car){
@@ -135,13 +139,18 @@
                         carsToInput += "<td>" + car.acceleration + " s</td>";
                         carsToInput += "<td>" + thousandSeparator(car.price) + " Kč</td>";
                         carsToInput += "</tr>";
-                    });
-                    $("#cars-tbody").append($(carsToInput));
-                    $("#sendForm").html("<span id='glyph-loading'></span>Vyhledat").removeClass("disabled");
-
-                    $("html, body").animate({scrollTop: $("#result").offset().top - 80}, 1000);
                 });
-            };
+
+                var endTime = new Date().getTime() - startTime;
+
+                $("#cars-tbody").append($(carsToInput));
+                $("#alert").addClass("alert alert-info").text("Načteno za " + endTime + " milisekund.")
+                $("#send-form").html("<span id='glyph-loading'></span>Vyhledat").removeClass("disabled");
+                $("#result-table").show();
+                $("html, body").animate({scrollTop: $("#result").offset().top - 80}, 1000);
+
+            });
+        };
 
             function thousandSeparator(x) {
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
