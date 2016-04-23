@@ -101,11 +101,21 @@ class CarOperation {
     }
 
     /**
-     * Vrati vsechny auta z databaze
+     * Vrati vsechny auta z databaze.
+     *
      * @return \Fagin\Data\Car[]
      */
     public function getAllCars() {
         return $this->database->fetchAllCars();
+    }
+
+    /**
+     * Vrati vsechna auta z databaze.
+     *
+     * @return string
+     */
+    public function getAllCarsJson() {
+        return $this->database->fetchAllCarsJson();
     }
 
     /**

@@ -85,45 +85,67 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">Vyhledat</button>
+                        <button type="button" id="sendForm" class="btn btn-default"><span id="glyph-loading"></span>Vyhledat</button>
                     </div>
                 </div>
             </div>
         </form>
 
-        {% if cars %}
-
-        <h1>Výsledky</h1>
+        <h1 id="result">Výsledky</h1>
         <p>Testovací výpis.</p>
 
-        <div class="alert alert-info" role="alert">Výpis databáze načten za {{ dbTime }} sekund.</div>
+        <!-- <div class="alert alert-info" role="alert">Výpis databáze načten za {{ dbTime }} sekund.</div> -->
 
         <div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="cars-table">
                 <thead>
                 <tr>
                     <th>Název</th><th>Obsah</th><th>Výkon</th><th>Tachometr</th><th>Rok výroby</th>
                     <th>Max. rychlost</th><th>Zrychlení</th><th>Cena</th>
                 </tr>
                 </thead>
-                <tbody>
-                {% for car in cars %}
-                    <tr>
-                        <td>{{ car.name }}</td>
-                        <td>{{ car.volume }} ccm</td>
-                        <td>{{ car.power }} kW</td>
-                        <td>{{ car.mileage }} km</td>
-                        <td>{{ car.manufactureyear }}</td>
-                        <td>{{ car.topspeed }} km/h</td>
-                        <td>{{ car.acceleration }} s</td>
-                        <td>{{ car.price }} Kč</td>
-                    </tr>
-                {% endfor %}
+                <tbody id="cars-tbody">
                 </tbody>
             </table>
         </div>
 
-        {% endif %}
 
     </div>
+{% endblock %}
+{% block javascript %}
+    <script>
+        $(document).ready(function () {
+
+            $("#sendForm").click(getData);
+
+            function getData() {
+                $("#sendForm").html("<span id='glyph-loading'></span> Vyhledávám...").addClass("disabled");
+                $("#glyph-loading").addClass("glyphicon glyphicon-refresh glyphicon-refresh-animate");
+                $("#cars-tbody").empty();
+                var carsToInput = '';
+                $.getJSON("/api/get-all-cars/").done(function(data) {
+                    $.each(data,function(index,car){
+                        carsToInput += "<tr>";
+                        carsToInput += "<td><a href='/car/" + car.id + "/'>" + car.name + "</a></td>";
+                        carsToInput += "<td>" + thousandSeparator(car.volume) + " ccm</td>";
+                        carsToInput += "<td>" + car.power + " kW</td>";
+                        carsToInput += "<td>" + thousandSeparator(car.mileage) + " km</td>";
+                        carsToInput += "<td>" + car.manufacture_year + "</td>";
+                        carsToInput += "<td>" + car.top_speed + " km/h</td>";
+                        carsToInput += "<td>" + car.acceleration + " s</td>";
+                        carsToInput += "<td>" + thousandSeparator(car.price) + " Kč</td>";
+                        carsToInput += "</tr>";
+                    });
+                    $("#cars-tbody").append($(carsToInput));
+                    $("#sendForm").html("<span id='glyph-loading'></span>Vyhledat").removeClass("disabled");
+
+                    $("html, body").animate({scrollTop: $("#result").offset().top - 80}, 1000);
+                });
+            };
+
+            function thousandSeparator(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+            }
+        });
+    </script>
 {% endblock %}

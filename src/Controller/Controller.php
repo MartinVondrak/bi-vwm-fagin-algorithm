@@ -22,6 +22,7 @@ class Controller
 
     /**
      * Controller constructor.
+     *
      * @param $twig
      */
     public function __construct($twig) {
@@ -29,19 +30,32 @@ class Controller
     }
 
     /**
-     * Funkce zavola twig->render
+     * Funkce zavola twig->render.
+     *
      * @param string $file
      * @param array $array
      */
-    public function render($file,$array = NULL) {
+    public function render($file,$array = array()) {
         return $this->twig->render($file,$array);
     }
 
+    /**
+     * Funkce vypisujici HTTP response.
+     *
+     * @param $code
+     * @return mixed
+     */
     public function response($code) {
         header($this->getCode($code));
         return $this->twig->render("static/error.html.twig",array('error' => $this->getCode($code)));
     }
 
+    /**
+     * Vraci HTTP code z pole CODES.
+     *
+     * @param $code
+     * @return mixed
+     */
     private function getCode($code) {
         if(!array_key_exists($code,self::CODES)) {
             return self::CODES["500"];

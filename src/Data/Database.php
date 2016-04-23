@@ -66,6 +66,19 @@ class Database {
     }
 
     /**
+     * Vrati JSON vsech aut z databaze.
+     *
+     * @return string
+     */
+    public function fetchAllCarsJson() {
+        $query = $this->database->prepare('SELECT * FROM `car`');
+        $query->setFetchMode(PDO::FETCH_ASSOC);
+        $query->execute();
+        $cars = $query->fetchAll();
+        return json_encode($cars);
+    }
+
+    /**
      * Vrati auto s nejvetsim zadanym parametrem.
      *
      * @param string $param

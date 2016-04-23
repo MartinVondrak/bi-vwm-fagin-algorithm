@@ -18,8 +18,6 @@ $faginController = new FaginController($twig);
 $staticController = new StaticController($twig);
 $testController = new TestController($twig);
 
-var_dump($uri);
-
 if (count($uri) == 2) {
     if($uri[1] == NULL) {
         echo $twig->render("static/index.html.twig");
@@ -42,8 +40,21 @@ elseif (count($uri) == 3) {
     }
 }
 else {
-    if ($uri[1] == "car" && $uri[3] == NULL) {
-        echo $faginController->carDetailAction($uri[2]);
+    if ($uri[3] == NULL) {
+        if ($uri[1] == "car") {
+            echo $faginController->carDetailAction($uri[2]);
+        }
+        elseif ($uri[1] == "api") {
+            if ($uri[2] == "get-all-cars") {
+                echo $faginController->getAllCarsAction();
+            }
+            else {
+                echo $staticController->response(404);
+            }
+        }
+        else {
+            echo $staticController->response(404);
+        }
     }
     else {
         echo $staticController->response(404);
