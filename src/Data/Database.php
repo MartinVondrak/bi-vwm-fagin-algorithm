@@ -98,6 +98,8 @@ class Database {
     }
 
     /**
+     * Vrati auto s nejmensim zadanym parametrem.
+     *
      * @param string $param
      * @return mixed
      * @throws InvalidParamException
@@ -159,8 +161,6 @@ class Database {
             throw new InvalidParamException($param);
         }
 
-        var_dump($param);
-
         $table = 'car_' . $param;
         $this->database->query('TRUNCATE TABLE `' . $table . '`');
         $sql = 'INSERT INTO `' . $table . '` (`id`, `' . $param . '`) VALUES ';
@@ -172,6 +172,28 @@ class Database {
         $sql = rtrim($sql, ", ");
         $query = $this->database->prepare($sql);
         return $query->execute();
+    }
+
+    /**
+     * Vrati pole se zaznamy aut.
+     * Kazdy zaznam je pole s ID auta a normalizovane hodnoty daneho parametru.
+     *
+     * @param string $param
+     * @return array
+     * @throws InvalidParamException
+     */
+    public function fetchNormalizedParamTable($param) {
+        if (!in_array($param, Car::PARAMS)) {
+            throw new InvalidParamException($param);
+        }
+
+        $table = 'car_' . $param;
+        $sql = 'SELECT * FROM `' . $table . '` ORDER BY `' . $param . '` DESC';
+        $query = $this->database->prepare($sql);
+        $query->setFetchMode(PDO::FETCH_ASSOC);
+        $query->execute();
+        $normalizedTable = $query->fetchAll();
+        return $normalizedTable;
     }
 
     /**
