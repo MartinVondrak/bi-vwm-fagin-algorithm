@@ -24,14 +24,32 @@ class FaginSearchService {
         $this->database = new Database();
     }
 
-    public function getKProductsWithParams($params) {
+    public function getKProductsWithParams($params, $k) {
         try {
+            echo time()."<br>";
             $normalizedTables = $this->getNormalizedTablesForParams($params);
+            echo time()."<br>";
         } catch (InvalidParamException $ex) {
             return $ex->getMessage();
         }
+        $tempArr = array();
+        $carCount = 0;
+        $i = 0;
+        echo time()."<br>";
+        while ($carCount < $k) {
+            foreach ($normalizedTables as $table) {
+                if (!key_exists($table[$i]['id'], $tempArr)) {
+                    $tempArr[$table[$i]['id']] = array();
+                }
 
-        return;
+                $tempArr[$table[$i]['id']][] = $table[$i];
+            }
+            $i++;
+            $carCount++;
+        }
+        echo time()."<br>";
+
+        return $tempArr;
     }
 
     /**
@@ -41,7 +59,7 @@ class FaginSearchService {
      * @return array
      * @throws InvalidParamException
      */
-    private function getNormalizedTablesForParams($params) {
+    public function getNormalizedTablesForParams($params) {
         $normalizedTables = array();
 
         foreach ($params as $param) {
