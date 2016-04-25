@@ -190,7 +190,7 @@ class Database {
         $table = 'car_' . $param;
         $sql = 'SELECT * FROM `' . $table . '` ORDER BY `' . $param . '` DESC';
         $query = $this->database->prepare($sql);
-        $query->setFetchMode(PDO::FETCH_ASSOC);
+        $query->setFetchMode(PDO::FETCH_KEY_PAIR);
         $query->execute();
         $normalizedTable = $query->fetchAll();
         return $normalizedTable;

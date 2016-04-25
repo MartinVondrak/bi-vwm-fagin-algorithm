@@ -26,44 +26,76 @@ class FaginSearchService {
 
     public function getKProductsWithParams($params, $k) {
         try {
-            echo time()."<br>";
             $normalizedTables = $this->getNormalizedTablesForParams($params);
-            echo time()."<br>";
         } catch (InvalidParamException $ex) {
             return $ex->getMessage();
         }
-        $tempArr = array();
-        $carCount = 0;
-        $i = 0;
-        echo time()."<br>";
-        while ($carCount < $k) {
-            foreach ($normalizedTables as $table) {
-                if (!key_exists($table[$i]['id'], $tempArr)) {
-                    $tempArr[$table[$i]['id']] = array();
+
+        $valuesForAggregation = $this->getProductsForAggregation($normalizedTables, $k, count($params), $params);
+        return $valuesForAggregation;
+    }
+
+    /**
+     * Vrati pole aut pripravenych pro agregacni funkci.
+     *
+     * @param \ArrayObject[] $tables
+     * @param int            $k
+     * @param int            $paramCount
+     * @param array          $params
+     * @return array
+     */
+    private function getProductsForAggregation($tables, $k, $paramCount, $params) {
+        $carArray = array();
+        $carFound = 0;
+        $index = 0;
+
+        if (empty($tables)) {
+            return $carArray;
+        }
+
+        while ($carFound < $k) {
+            foreach ($tables as $param => $table) {
+                $it = $table->getIterator();
+                $it->seek($index);
+
+                if (!isset($carArray[$it->key()])) {
+                    $carArray[$it->key()] = array();
                 }
 
-                $tempArr[$table[$i]['id']][] = $table[$i];
-            }
-            $i++;
-            $carCount++;
-        }
-        echo time()."<br>";
+                $carArray[$it->key()][$param] = array();
+                $carArray[$it->key()][$param] = $it->current();
 
-        return $tempArr;
+                if (count($carArray[$it->key()]) == $paramCount) {
+                    $carFound++;
+                }
+            }
+
+            $index++;
+        }
+
+        foreach ($params as $param) {
+            foreach ($carArray as $carId => $carParams) {
+                if (!isset($carArray[$carId][$param])) {
+                    $carArray[$carId][$param] = $tables[$param][$carId];
+                }
+            }
+        }
+
+        return $carArray;
     }
 
     /**
      * Vrati pole s normalizovanymi tabulkami podle zadanych parametru.
      *
      * @param array $params
-     * @return array
+     * @return \ArrayObject[]
      * @throws InvalidParamException
      */
-    public function getNormalizedTablesForParams($params) {
+    private function getNormalizedTablesForParams($params) {
         $normalizedTables = array();
 
         foreach ($params as $param) {
-            $normalizedTables[] = $this->database->fetchNormalizedParamTable($param);
+            $normalizedTables[$param] = new \ArrayObject($this->database->fetchNormalizedParamTable($param));
         }
 
         return $normalizedTables;

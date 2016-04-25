@@ -11,8 +11,8 @@ require_once 'autoload.php';
 use Fagin\Data\Car;
 use Fagin\Service\FaginSearchService;
 
-$fakin = new FaginSearchService();
-$cars = $fakin->getKProductsWithParams(array(Car::ACCELERATION, Car::MANUFACTURE_YEAR, Car::MILEAGE), 5);
+$fakin = new \Fagin\Service\FaginSearchService();
+$cars = $fakin->getKProductsWithParams(array(Car::VOLUME, Car::POWER), 4);
 print '<pre>';
 var_dump($cars);
 print '</pre>';
