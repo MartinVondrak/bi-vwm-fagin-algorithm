@@ -12,7 +12,7 @@ use Fagin\Data\Car;
 use Fagin\Service\FaginSearchService;
 
 $fakin = new \Fagin\Service\FaginSearchService();
-$cars = $fakin->getKProductsWithParams(array(Car::VOLUME, Car::POWER), 4);
+$cars = $fakin->getKProductsWithParams(array(Car::VOLUME, Car::POWER), 4, 'max');
 print '<pre>';
 var_dump($cars);
 print '</pre>';
