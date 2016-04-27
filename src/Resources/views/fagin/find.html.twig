@@ -47,30 +47,32 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-sm-2">
-                        <label>Parametry</label>
+                        <label for="params">Parametry</label>
                     </div>
                     <div class="col-sm-10">
                         <label class="checkbox-inline" for="volume">
-                            <input type="checkbox" name="volume" value="true">Obsah
+                            <input class="param-checkbox" type="checkbox" value="Car::VOLUME">Obsah
                         </label>
                         <label class="checkbox-inline" for="power">
-                            <input type="checkbox" name="power" value="true">Výkon
+                            <input class="param-checkbox" type="checkbox" value="Car::POWER">Výkon
                         </label>
                         <label class="checkbox-inline" for="mileage">
-                            <input type="checkbox" name="mileage" value="true">Tachometr
+                            <input class="param-checkbox" type="checkbox" value="Car::MILEAGE">Tachometr
                         </label>
                         <label class="checkbox-inline" for="manufacture_year">
-                            <input type="checkbox" name="manufacture_year" value="true">Rok výroby
+                            <input class="param-checkbox" type="checkbox" value="Car::MANUFACTURE_YEAR">Rok výroby
                         </label>
                         <label class="checkbox-inline" for="top_speed">
-                            <input type="checkbox" name="top_speed" value="true">Max. rychlost
+                            <input class="param-checkbox" type="checkbox" value="Car::TOP_SPEED">Max. rychlost
                         </label>
                         <label class="checkbox-inline" for="acceleration">
-                            <input type="checkbox" name="acceleration" value="true">Zrychlení
+                            <input class="param-checkbox" type="checkbox" value="Car::ACCELERATION">Zrychlení
                         </label>
                         <label class="checkbox-inline" for="price">
-                            <input type="checkbox" name="price" value="true">Cena
+                            <input class="param-checkbox" type="checkbox" value="Car::PRICE">Cena
                         </label>
+                        <input class="params" type="hidden" name="params">
+                        <span id="paramError" class="form-error"></span>
                     </div>
                 </div>
             </div>
@@ -128,9 +130,27 @@
         $(document).ready(function () {
 
             /**
+             * Funkce pridava hodnotu zakrtnuteho checkboxu do jedne promenne params
+             */
+            function addParam() {
+                var param = $.map($("input:checkbox:checked.param-checkbox"), function(e) {
+                    //console.log(e.value);
+                    return e.value;
+                });
+                $(".params").val(param);
+                //console.log($("#params").val());
+            }
+
+            $(".col-sm-10").delegate("input:checkbox","click",addParam);
+
+
+            /**
              * Zvaliduje formular
              */
-            function validateForm() {
+            function validateForm(event) {
+
+                event.preventDefault();
+
                 $("#fagin-form").validate({
                     errorPlacement: function(error, element) {
                         if (element.attr("name") == "algorithm") {
@@ -142,13 +162,25 @@
                         if (element.attr("name") == "top_k") {
                             error.appendTo($("#top_kError"));
                         }
+                        if (element.attr("name") == "params") {
+                            error.appendTo($("#paramError"));
+                        }
                     },
+                    ignore:"",
                     rules: {
-                        algorithm: "required",
-                        agregation: "required",
+                        algorithm: {
+                            required: true
+                        },
+                        agregation: {
+                            required: true
+                        },
                         top_k: {
                             required: true,
                             digits: true
+                        },
+                        params: {
+                            required: true,
+                            minlength: 1
                         }
                     },
                     messages: {
@@ -158,6 +190,7 @@
                             required: "* vyplnte pocet top_k vysledku",
                             digits: "* musi byt cislo"
                         },
+                        params: "* vyberte alespon jeden parametr"
                     },
                     submitHandler: function () {
                         getData();
@@ -165,12 +198,12 @@
                 });
             }
 
-            $("#fagin-form").submit(validateForm());
+            $("#fagin-form").submit(validateForm(event));
 
             /**
              * Funkce pro obsluhu AJAX pozadavku
              */
-            function getData(event) {
+            function getData() {
 
                 $("#send-form").html("<span id='glyph-loading'></span> Vyhledávám...").addClass("disabled");
                 $("#glyph-loading").addClass("glyphicon glyphicon-refresh glyphicon-refresh-animate");
@@ -204,6 +237,7 @@
                             }
                         })
                 ).done(function () {
+                    console.log($("#fagin-form").serialize());
                     var endTime = new Date().getTime() - startTime;
                     $("#cars-tbody").append($(carsToInput));
                     $("#alert").text("Načteno za " + endTime + " milisekund.").show();
