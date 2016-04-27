@@ -11,21 +11,34 @@
         <section>
             <dl>
                 <dt>Volume</dt>
-                <dd>{{ car.volume }} ccm</dd>
+                <dd id="volume">{{ car.volume }} ccm</dd>
                 <dt>Power</dt>
-                <dd>{{ car.power }} kW</dd>
+                <dd id="power">{{ car.power }} kW</dd>
                 <dt>Mileage</dt>
-                <dd>{{ car.mileage }} km</dd>
+                <dd id="mileage">{{ car.mileage }} km</dd>
                 <dt>Manufacture year</dt>
-                <dd>{{ car.manufactureyear }}</dd>
+                <dd id="manufacture_year">{{ car.manufactureyear }}</dd>
                 <dt>V-max</dt>
-                <dd>{{ car.topspeed }} km/h</dd>
+                <dd id="top_speed">{{ car.topspeed }} km/h</dd>
                 <dt>Acceleration</dt>
-                <dd>{{ car.acceleration }} s</dd>
+                <dd id="acceleration">{{ car.acceleration }} s</dd>
                 <dt>Price</dt>
-                <dd>{{ car.price }} Kč</dd>
+                <dd id="price">{{ car.price }} Kč</dd>
             </dl>
         </section>
 
     </div>
+{% endblock %}
+{% block javascript %}
+    <script>
+        $(document).ready(function() {
+            function thousandSeparator(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+            }
+
+            $("#volume").text(thousandSeparator($("#volume").text()));
+            $("#mileage").text(thousandSeparator($("#mileage").text()));
+            $("#price").text(thousandSeparator($("#price").text()));
+        });
+    </script>
 {% endblock %}

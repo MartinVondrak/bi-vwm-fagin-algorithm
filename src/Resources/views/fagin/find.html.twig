@@ -28,19 +28,19 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-sm-2">
-                        <label for="agregation">Agregační funkce</label>
+                        <label for="aggregation">Agregační funkce</label>
                     </div>
                     <div class="col-sm-10">
                         <label class="radio-inline">
-                            <input type="radio" name="agregation" value="AbstractSearchService::MIN">Min
+                            <input type="radio" name="aggregation" value="min">Min
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="agregation" value="AbstractSearchService::MAX">Max
+                            <input type="radio" name="aggregation" value="max">Max
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="agregation" value="AbstractSearchService::AVG">Průměr
+                            <input type="radio" name="aggregation" value="average">Průměr
                         </label>
-                        <span id="agregationError" class="form-error"></span>
+                        <span id="aggregationError" class="form-error"></span>
                     </div>
                 </div>
             </div>
@@ -51,25 +51,25 @@
                     </div>
                     <div class="col-sm-10">
                         <label class="checkbox-inline" for="volume">
-                            <input class="param-checkbox" type="checkbox" value="Car::VOLUME">Obsah
+                            <input class="param-checkbox" type="checkbox" value="volume">Obsah
                         </label>
                         <label class="checkbox-inline" for="power">
-                            <input class="param-checkbox" type="checkbox" value="Car::POWER">Výkon
+                            <input class="param-checkbox" type="checkbox" value="power">Výkon
                         </label>
                         <label class="checkbox-inline" for="mileage">
-                            <input class="param-checkbox" type="checkbox" value="Car::MILEAGE">Tachometr
+                            <input class="param-checkbox" type="checkbox" value="mileage">Tachometr
                         </label>
                         <label class="checkbox-inline" for="manufacture_year">
-                            <input class="param-checkbox" type="checkbox" value="Car::MANUFACTURE_YEAR">Rok výroby
+                            <input class="param-checkbox" type="checkbox" value="manufacture_year">Rok výroby
                         </label>
                         <label class="checkbox-inline" for="top_speed">
-                            <input class="param-checkbox" type="checkbox" value="Car::TOP_SPEED">Max. rychlost
+                            <input class="param-checkbox" type="checkbox" value="top_speed">Max. rychlost
                         </label>
                         <label class="checkbox-inline" for="acceleration">
-                            <input class="param-checkbox" type="checkbox" value="Car::ACCELERATION">Zrychlení
+                            <input class="param-checkbox" type="checkbox" value="acceleration">Zrychlení
                         </label>
                         <label class="checkbox-inline" for="price">
-                            <input class="param-checkbox" type="checkbox" value="Car::PRICE">Cena
+                            <input class="param-checkbox" type="checkbox" value="price">Cena
                         </label>
                         <input class="params" type="hidden" name="params">
                         <span id="paramError" class="form-error"></span>
@@ -137,8 +137,9 @@
                     //console.log(e.value);
                     return e.value;
                 });
+                console.log(param);
                 $(".params").val(param);
-                //console.log($("#params").val());
+                console.log($(".params").val());
             }
 
             $(".col-sm-10").delegate("input:checkbox","click",addParam);
@@ -156,8 +157,8 @@
                         if (element.attr("name") == "algorithm") {
                             error.appendTo($("#algorithmError"));
                         }
-                        if (element.attr("name") == "agregation") {
-                            error.appendTo($("#agregationError"));
+                        if (element.attr("name") == "aggregation") {
+                            error.appendTo($("#aggregationError"));
                         }
                         if (element.attr("name") == "top_k") {
                             error.appendTo($("#top_kError"));
@@ -171,7 +172,7 @@
                         algorithm: {
                             required: true
                         },
-                        agregation: {
+                        aggregation: {
                             required: true
                         },
                         top_k: {
@@ -185,7 +186,7 @@
                     },
                     messages: {
                         algorithm: "* vyberte typ algoritmu",
-                        agregation: "* vyberte agregacni funkci",
+                        aggregation: "* vyberte agregacni funkci",
                         top_k: {
                             required: "* vyplnte pocet top_k vysledku",
                             digits: "* musi byt cislo"
@@ -217,7 +218,7 @@
                 $.when(
                         $.ajax({
                             type: "POST",
-                            url: "/api/get-all-cars/",
+                            url: "/api/get-cars-from-form/",
                             dataType: "json",
                             data: $("#fagin-form").serialize(),
                             success: function (data) {
@@ -234,6 +235,11 @@
                                     carsToInput += "</tr>";
                                 })
 
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                $("#send-form").html("<span id='glyph-loading'></span>Vyhledat").removeClass("disabled");
+                                alert(xhr.status);
+                                alert(thrownError);
                             }
                         })
                 ).done(function () {

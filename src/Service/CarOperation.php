@@ -118,4 +118,5 @@ class CarOperation {
     public function getCarById($id) {
         return $this->database->fetchCar($id);
     }
+
 }

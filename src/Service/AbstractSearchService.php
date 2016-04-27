@@ -19,6 +19,13 @@ abstract class AbstractSearchService {
     const MAX = 'max';
     const AVG = 'average';
 
+    /** @var array AGGREGATIONS */
+    const AGGREGATIONS = array(
+        self::MIN,
+        self::MAX,
+        self::AVG
+    );
+
     /** @var Database $database */
     protected $database;
 

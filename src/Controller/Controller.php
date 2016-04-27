@@ -16,6 +16,7 @@ class Controller
     private $twig;
 
     const CODES = array(
+        "400" => "HTTP/1.1 400 BAD REQUEST",
         "404" => "HTTP/1.1 404 NOT FOUND",
         "500" => "HTTP/1.1 500 INTERNAL ERROR"
     );
