@@ -100,7 +100,8 @@
         <div id="result-table">
 
             <h1 id="result">Výsledky</h1>
-            <div id="alert" role="alert" class="alert alert-info"></div>
+            <div id="alert-info" role="alert" class="alert alert-info"></div>
+            <div id="alert-danger" role="alert" class="alert alert-danger"></div>
 
             <div class="table-responsive">
                 <table class="table table-bordered" id="cars-table">
@@ -134,12 +135,9 @@
              */
             function addParam() {
                 var param = $.map($("input:checkbox:checked.param-checkbox"), function(e) {
-                    //console.log(e.value);
                     return e.value;
                 });
-                console.log(param);
                 $(".params").val(param);
-                console.log($(".params").val());
             }
 
             $(".col-sm-10").delegate("input:checkbox","click",addParam);
@@ -209,7 +207,8 @@
                 $("#send-form").html("<span id='glyph-loading'></span> Vyhledávám...").addClass("disabled");
                 $("#glyph-loading").addClass("glyphicon glyphicon-refresh glyphicon-refresh-animate");
                 $("#cars-tbody").empty();
-                $("#alert").hide();
+                $("#alert-info").hide();
+                $("#alert-danger").hide();
 
                 var startTime = new Date().getTime();
 
@@ -218,7 +217,7 @@
                 $.when(
                         $.ajax({
                             type: "POST",
-                            url: "/api/get-cars-from-form/",
+                            url: "/api/find-cars/",
                             dataType: "json",
                             data: $("#fagin-form").serialize(),
                             success: function (data) {
@@ -234,26 +233,23 @@
                                     carsToInput += "<td>" + thousandSeparator(car.price) + " Kč</td>";
                                     carsToInput += "</tr>";
                                 })
-
                             },
-                            error: function (xhr, ajaxOptions, thrownError) {
+                            error: function () {
                                 $("#send-form").html("<span id='glyph-loading'></span>Vyhledat").removeClass("disabled");
-                                alert(xhr.status);
-                                alert(thrownError);
+                                $("#alert-danger").text("Požadavek nelze zpracovat.").show();
                             }
                         })
                 ).done(function () {
-                    console.log($("#fagin-form").serialize());
                     var endTime = new Date().getTime() - startTime;
                     $("#cars-tbody").append($(carsToInput));
-                    $("#alert").text("Načteno za " + endTime + " milisekund.").show();
+                    $("#alert-info").text("Načteno za " + endTime + " milisekund.").show();
                     $("#send-form").html("<span id='glyph-loading'></span>Vyhledat").removeClass("disabled");
                     $("#result-table").show();
                     $("html, body").animate({scrollTop: $("#result").offset().top - 80}, 1000);
                 });
 
 
-            };
+            }
 
             function thousandSeparator(x) {
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
