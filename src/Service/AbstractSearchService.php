@@ -29,11 +29,15 @@ abstract class AbstractSearchService {
     /** @var Database $database */
     protected $database;
 
+    /** @var TimerLogger $timeLoger */
+    protected $timeLogger;
+
     /**
      * AbstractSearchService konstruktor.
      */
     public function __construct() {
         $this->database = new Database();
+        $this->timeLogger = new TimerLogger($_SERVER['DOCUMENT_ROOT'] . '/logs/time.log');
     }
 
     /**
@@ -44,8 +48,8 @@ abstract class AbstractSearchService {
      * @throws InvalidParamException
      */
     protected function avg($values) {
-        if (!is_array($values)) {
-            throw new InvalidParamException('Expected array ' . gettype($values) . 'given.');
+        if (!is_array($values) or empty($values)) {
+            throw new InvalidParamException('Expected non-empty array ' . gettype($values) . 'given.');
         }
 
         return array_sum($values) / count($values);

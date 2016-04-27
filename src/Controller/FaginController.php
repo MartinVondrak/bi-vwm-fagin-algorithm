@@ -25,6 +25,11 @@ class FaginController extends Controller {
     /** @var FaginSearchService $faginService */
     private $faginService;
 
+    /**
+     * FaginController konstruktor.
+     *
+     * @param \Twig_Environment $twig
+     */
     public function __construct($twig) {
         parent::__construct($twig);
         $this->carOperation = new CarOperation();
@@ -58,7 +63,7 @@ class FaginController extends Controller {
     public function findCarsAction() {
         try {
             $aggregation = $this->validateAggregation($_POST["aggregation"]);
-            $params = $this->validateParams(explode(",",$_POST["params"]));
+            $params = $this->validateParams(explode(",", $_POST["params"]));
             $top_k = $this->validateTopK($_POST["top_k"]);
         } catch (InvalidAggregationFunctionException $ex) {
             header(self::CODES[400]);
@@ -98,7 +103,7 @@ class FaginController extends Controller {
      * @throws InvalidParamException
      */
     private function validateParams($params) {
-        foreach($params as $param) {
+        foreach ($params as $param) {
             if (!in_array($param, Car::PARAMS)) {
                 throw new InvalidParamException($params);
             }
@@ -113,7 +118,7 @@ class FaginController extends Controller {
      * @return string
      * @throws InvalidTopKException
      */
-    private function validateTopK ($top_k) {
+    private function validateTopK($top_k) {
         if (!is_numeric($top_k)) {
             throw new InvalidTopKException($top_k);
         }

@@ -53,6 +53,20 @@ class Database {
     }
 
     /**
+     * Vraci auta podle zadaneho pole s ID.
+     *
+     * @param array $ids
+     * @return Car[]
+     */
+    public function fetchCarByIds($ids) {
+        $query = $this->database->prepare('SELECT * FROM `car` WHERE `id` IN (' . str_repeat('?, ', count($ids) - 1) . '?)');
+        $query->setFetchMode(PDO::FETCH_CLASS, 'Fagin\Data\Car');
+        $query->execute($ids);
+        $cars = $query->fetchAll();
+        return $cars;
+    }
+
+    /**
      * Vrati vsechna auta jako pole.
      *
      * @return Car[]

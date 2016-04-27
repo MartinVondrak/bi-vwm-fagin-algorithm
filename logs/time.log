@@ -1,0 +1,44 @@
+[28-04-2016 00:44:36] (127.0.0.1) -0.891283 Getting normalized table for params: volume, power, mileage, manufacture_year, top_speed, acceleration, price
+[28-04-2016 00:51:46] EVENT (127.0.0.1) 0.127157 Getting normalized table for params: volume, power, mileage, manufacture_year, top_speed, acceleration, price.
+[28-04-2016 00:51:46] MESSAGE (127.0.0.1) 0.71718300 1461797506
+[28-04-2016 00:51:46] MESSAGE (127.0.0.1) 0.84434000 1461797506
+[28-04-2016 00:53:12] EVENT (127.0.0.1) 0.109588 Getting normalized table for params: volume, power, mileage, manufacture_year, top_speed, acceleration, price.
+[28-04-2016 00:53:12] MESSAGE (127.0.0.1) 0.06671800 1461797592
+[28-04-2016 00:53:12] MESSAGE (127.0.0.1) 0.17630600 1461797592
+[28-04-2016 00:57:13] EVENT (127.0.0.1) 0.123905 Getting normalized table for params: volume, power, mileage, manufacture_year, top_speed, acceleration, price.
+[28-04-2016 00:58:50] EVENT (127.0.0.1) 115.511ms Getting normalized table for params: volume, power, mileage, manufacture_year, top_speed, acceleration, price.
+[28-04-2016 01:00:50] EVENT (127.0.0.1) 116.367ms Getting normalized table for params: volume, power, mileage, manufacture_year, top_speed, acceleration, price.
+[28-04-2016 01:04:25] EVENT (127.0.0.1) 120.183ms Getting normalized table for params: volume, power, mileage, manufacture_year, top_speed, acceleration, price.
+[28-04-2016 01:04:26] EVENT (127.0.0.1) -66.535ms Getting 3200complete products.
+[28-04-2016 01:04:26] EVENT (127.0.0.1) 8.682ms Getting cross links
+[28-04-2016 01:05:42] EVENT (127.0.0.1) 130.482ms Getting normalized table for params: volume, power, mileage, manufacture_year, top_speed, acceleration, price.
+[28-04-2016 01:05:43] EVENT (127.0.0.1) -74.929ms Getting 3200 complete products.
+[28-04-2016 01:05:43] EVENT (127.0.0.1) 10.979ms Getting cross links
+[28-04-2016 01:06:23] EVENT (127.0.0.1) 137.203ms Getting normalized table for params: volume, power, mileage, manufacture_year, top_speed, acceleration, price.
+[28-04-2016 01:06:23] EVENT (127.0.0.1) 920.12ms Getting 3200 complete products.
+[28-04-2016 01:06:23] EVENT (127.0.0.1) 7.019ms Getting cross links
+[28-04-2016 01:08:39] EVENT (127.0.0.1) 114.239ms Getting normalized table for params: volume, power, mileage, manufacture_year, top_speed, acceleration, price.
+[28-04-2016 01:08:40] EVENT (127.0.0.1) 917.973ms Getting 3200 complete products.
+[28-04-2016 01:08:40] EVENT (127.0.0.1) 9.232ms Getting cross links
+[28-04-2016 01:08:40] EVENT (127.0.0.1) 12.329ms Sorting cars
+[28-04-2016 01:13:01] EVENT (127.0.0.1) 127.554ms Getting normalized table for params: volume, power, mileage, manufacture_year, top_speed, acceleration, price.
+[28-04-2016 01:13:01] EVENT (127.0.0.1) 0.006ms Call of getProductsForAggregation.
+[28-04-2016 01:13:02] EVENT (127.0.0.1) 952.587ms Getting 3200 complete products.
+[28-04-2016 01:13:02] EVENT (127.0.0.1) 7.23ms Getting cross links
+[28-04-2016 01:13:02] EVENT (127.0.0.1) 0.004ms Return from getProductsForAggregation.
+[28-04-2016 01:13:02] EVENT (127.0.0.1) 12.081ms Sorting cars
+[28-04-2016 01:13:08] EVENT (127.0.0.1) 6720.829ms Get final top 3200 products.
+[28-04-2016 01:23:37] EVENT (127.0.0.1) 40.142ms Getting normalized table for params: volume, power.
+[28-04-2016 01:23:37] EVENT (127.0.0.1) 0.008ms Call of getProductsForAggregation.
+[28-04-2016 01:23:37] EVENT (127.0.0.1) 0.097ms Getting 4 complete products.
+[28-04-2016 01:23:37] EVENT (127.0.0.1) 0.023ms Getting cross links
+[28-04-2016 01:23:37] EVENT (127.0.0.1) 0.002ms Return from getProductsForAggregation.
+[28-04-2016 01:23:37] EVENT (127.0.0.1) 0.037ms Sorting cars
+[28-04-2016 01:23:37] EVENT (127.0.0.1) 1.652ms Get final top 4 products.
+[28-04-2016 01:24:11] EVENT (127.0.0.1) 114.328ms Getting normalized table for params: volume, power, mileage, manufacture_year, top_speed, acceleration, price.
+[28-04-2016 01:24:11] EVENT (127.0.0.1) 0.007ms Call of getProductsForAggregation.
+[28-04-2016 01:24:12] EVENT (127.0.0.1) 959.864ms Getting 3200 complete products.
+[28-04-2016 01:24:12] EVENT (127.0.0.1) 7.808ms Getting cross links
+[28-04-2016 01:24:12] EVENT (127.0.0.1) 0.005ms Return from getProductsForAggregation.
+[28-04-2016 01:24:12] EVENT (127.0.0.1) 13.181ms Sorting cars
+[28-04-2016 01:24:12] EVENT (127.0.0.1) 263.026ms Get final top 3200 products.

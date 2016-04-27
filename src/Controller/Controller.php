@@ -9,10 +9,9 @@
 
 namespace Fagin\Controller;
 
-use Fagin\Data\Database;
+class Controller {
 
-class Controller
-{
+    /** @var \Twig_Environment $twig */
     private $twig;
 
     const CODES = array(
@@ -24,7 +23,7 @@ class Controller
     /**
      * Controller constructor.
      *
-     * @param $twig
+     * @param \Twig_Environment $twig
      */
     public function __construct($twig) {
         $this->twig = $twig;
@@ -34,10 +33,11 @@ class Controller
      * Funkce zavola twig->render.
      *
      * @param string $file
-     * @param array $array
+     * @param array  $array
+     * @return string
      */
-    public function render($file,$array = array()) {
-        return $this->twig->render($file,$array);
+    public function render($file, $array = array()) {
+        return $this->twig->render($file, $array);
     }
 
     /**
@@ -48,7 +48,7 @@ class Controller
      */
     public function response($code) {
         header($this->getCode($code));
-        return $this->twig->render("static/error.html.twig",array('error' => $this->getCode($code)));
+        return $this->twig->render("static/error.html.twig", array('error' => $this->getCode($code)));
     }
 
     /**
@@ -58,7 +58,7 @@ class Controller
      * @return mixed
      */
     private function getCode($code) {
-        if(!array_key_exists($code,self::CODES)) {
+        if (!array_key_exists($code, self::CODES)) {
             return self::CODES["500"];
         }
         return self::CODES[$code];

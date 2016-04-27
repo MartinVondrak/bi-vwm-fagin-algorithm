@@ -26,12 +26,16 @@ class FaginSearchService extends AbstractSearchService {
      */
     public function getKProductsWithParams($params, $k, $aggregation) {
         try {
+            $this->timeLogger->start();
             $normalizedTables = $this->getNormalizedTablesForParams($params);
+            $this->timeLogger->stop('Getting normalized table for params: ' . implode(', ', $params) . '.');
         } catch (InvalidParamException $ex) {
             return $ex->getMessage();
         }
 
+        $this->timeLogger->start();
         $carsForAggregation = $this->getProductsForAggregation($normalizedTables, $k, count($params), $params);
+        $this->timeLogger->stop('Return from getProductsForAggregation.');
 
         try {
             $sortedCars = $this->aggregateAndSortProducts($carsForAggregation, $aggregation);
@@ -41,7 +45,9 @@ class FaginSearchService extends AbstractSearchService {
             return $ex->getMessage();
         }
 
+        $this->timeLogger->start();
         $cars = $this->getTopKCars($sortedCars, $k);
+        $this->timeLogger->stop('Get final top ' . $k . ' products.');
         return $cars;
     }
 
@@ -53,14 +59,15 @@ class FaginSearchService extends AbstractSearchService {
      * @return Car[]
      */
     private function getTopKCars($sorted, $k) {
-        $cars = array();
+        $carIds = array();
         reset($sorted);
 
         for ($i = 0; $i < $k; $i++) {
-            $cars[] = $this->database->fetchCar(key($sorted));
+            $carIds[] = key($sorted);
             next($sorted);
         }
 
+        $cars = $this->database->fetchCarByIds($carIds);
         return $cars;
     }
 
@@ -93,7 +100,9 @@ class FaginSearchService extends AbstractSearchService {
             $cars[$id]['aggregation'] = $aggregatedValues;
         }
 
+        $this->timeLogger->start();
         uasort($cars, array('self', 'sortCarsDesc'));
+        $this->timeLogger->stop('Sorting cars');
         return $cars;
     }
 
@@ -107,6 +116,7 @@ class FaginSearchService extends AbstractSearchService {
      * @return array
      */
     private function getProductsForAggregation($tables, $k, $paramCount, $params) {
+        $this->timeLogger->stop('Call of getProductsForAggregation.');
         $carArray = array();
         $carFound = 0;
         $index = 0;
@@ -114,6 +124,8 @@ class FaginSearchService extends AbstractSearchService {
         if (empty($tables)) {
             return $carArray;
         }
+
+        $this->timeLogger->start();
 
         while ($carFound < $k) {
             foreach ($tables as $param => $table) {
@@ -135,6 +147,9 @@ class FaginSearchService extends AbstractSearchService {
             $index++;
         }
 
+        $this->timeLogger->stop('Getting ' . $k . ' complete products.');
+        $this->timeLogger->start();
+
         foreach ($params as $param) {
             foreach ($carArray as $carId => $carParams) {
                 if (!isset($carArray[$carId][$param])) {
@@ -143,6 +158,8 @@ class FaginSearchService extends AbstractSearchService {
             }
         }
 
+        $this->timeLogger->stop('Getting cross links');
+        $this->timeLogger->start();
         return $carArray;
     }
 
