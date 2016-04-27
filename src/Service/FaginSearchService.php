@@ -10,21 +10,10 @@ namespace Fagin\Service;
 
 
 use Fagin\Data\Car;
-use Fagin\Data\Database;
 use Fagin\Exception\InvalidParamException;
 use Fagin\Exception\InvalidAggregationFunctionException;
 
-class FaginSearchService {
-
-    /** @var Database $database */
-    private $database;
-
-    /**
-     * SearchService konstruktor.
-     */
-    public function __construct() {
-        $this->database = new Database();
-    }
+class FaginSearchService extends AbstractSearchService {
 
     /**
      * Realizuje Faginuv algoritmus.
@@ -87,13 +76,13 @@ class FaginSearchService {
     private function aggregateAndSortProducts($cars, $aggregationFunction) {
         foreach ($cars as $id => $params) {
             switch ($aggregationFunction) {
-                case 'max':
+                case self::MAX:
                     $aggregatedValues = max($params);
                     break;
-                case 'min':
+                case self::MIN:
                     $aggregatedValues = min($params);
                     break;
-                case 'avg':
+                case self::AVG:
                     $aggregatedValues = $this->avg($params);
                     break;
                 default:
@@ -173,22 +162,6 @@ class FaginSearchService {
 
         return $normalizedTables;
     }
-
-    /**
-     * Spocita prumer hodnot v poli.
-     *
-     * @param array $values
-     * @return float
-     * @throws InvalidParamException
-     */
-    private function avg($values) {
-        if (!is_array($values)) {
-            throw new InvalidParamException('Expected array ' . gettype($values) . 'given.');
-        }
-
-        return array_sum($values) / count($values);
-    }
-
 
     /**
      * Komparator pro razeni aut podle agregovanych hodnot sestupne.

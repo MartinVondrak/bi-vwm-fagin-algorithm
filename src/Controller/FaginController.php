@@ -9,17 +9,30 @@
 namespace Fagin\Controller;
 
 use Fagin\Service\CarOperation;
+use Fagin\Service\FaginSearchService;
 
 
-class FaginController extends Controller
-{
+class FaginController extends Controller {
+
+    /** @var CarOperation $carOperation */
+    private $carOperation;
+
+    /** @var FaginSearchService $faginService */
+    private $faginService;
+
+    public function __construct($twig) {
+        parent::__construct($twig);
+        $this->carOperation = new CarOperation();
+        $this->faginService = new FaginSearchService();
+    }
+
     /**
      * Vyrenderuje vyhledavaci formular
      *
      * @return mixed
      */
     public function findAction() {
-        return $this->render("fagin/find.html.twig");
+        return $this->render('fagin/find.html.twig');
     }
 
     /**
@@ -27,9 +40,8 @@ class FaginController extends Controller
      *
      * @return string
      */
-    public function getAllCarsAction () {
-        $operation = new CarOperation();
-        $cars = json_encode($operation->getAllCars());
+    public function getAllCarsAction() {
+        $cars = json_encode($this->carOperation->getAllCars());
         return $cars;
     }
 
@@ -40,15 +52,14 @@ class FaginController extends Controller
      * @return mixed
      */
     public function carDetailAction($id) {
-        if(!is_numeric($id)) {
+        if (!is_int($id)) {
             return $this->response(404);
         }
-        $operation = new CarOperation();
-        $car = $operation->getCarById($id);
-        if ($car == NULL){
+        $car = $this->carOperation->getCarById($id);
+        if ($car == null) {
             return $this->response(404);
         }
-        return $this->render("fagin/car-detail.html.twig",array('car' => $car));
+        return $this->render('fagin/car-detail.html.twig', array('car' => $car));
     }
 
 }

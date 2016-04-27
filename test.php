@@ -13,9 +13,7 @@ use Fagin\Service\FaginSearchService;
 
 $fakin = new \Fagin\Service\FaginSearchService();
 $db = new \Fagin\Data\Database();
-$car = $db->fetchCar(2);
-var_dump(json_encode($car));
-$cars = json_encode($fakin->getKProductsWithParams(array(Car::VOLUME, Car::POWER), 4, 'max'));
+$cars = $fakin->getKProductsWithParams(array(Car::VOLUME, Car::POWER), 4, FaginSearchService::MAX);
 print '<pre>';
 var_dump($cars);
 print '</pre>';
