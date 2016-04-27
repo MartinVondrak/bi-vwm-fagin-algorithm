@@ -29,7 +29,7 @@ class FaginController extends Controller
      */
     public function getAllCarsAction () {
         $operation = new CarOperation();
-        $cars = $operation->getAllCarsJson();
+        $cars = json_encode($operation->getAllCars());
         return $cars;
     }
 

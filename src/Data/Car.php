@@ -11,7 +11,7 @@ namespace Fagin\Data;
 
 use Fagin\Exception\InvalidParamException;
 
-class Car {
+class Car implements \JsonSerializable {
 
     const VOLUME = 'volume';
     const POWER = 'power';
@@ -205,6 +205,36 @@ class Car {
         }
 
         return $this->$param;
+    }
+
+    /**
+     * Prevede objekt Car na asociativni pole pro funkci json_encode().
+     *
+     * @return array
+     */
+    public function jsonSerialize() {
+        return $this->toArray();
+    }
+
+    /**
+     * Prevede objekt na asociativni pole.
+     *
+     * @return array
+     */
+    public function toArray() {
+        $cars = array();
+        $cars['id'] = $this->id;
+        $cars['name'] = $this->name;
+
+        foreach (self::PARAMS as $param) {
+            try {
+                $cars[$param] = $this->getParam($param);
+            } catch (InvalidParamException $ex) {
+                return array();
+            }
+        }
+
+        return $cars;
     }
 
 }

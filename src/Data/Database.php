@@ -39,7 +39,7 @@ class Database {
     }
 
     /**
-     * Vrati objekt Car pro id dane parametrem.
+     * Vrati auto podle ID.
      *
      * @param int $id
      * @return Car
@@ -53,7 +53,7 @@ class Database {
     }
 
     /**
-     * Vrati pole vsech objektu Car v databazi.
+     * Vrati vsechna auta jako pole.
      *
      * @return Car[]
      */
@@ -63,19 +63,6 @@ class Database {
         $query->execute();
         $cars = $query->fetchAll();
         return $cars;
-    }
-
-    /**
-     * Vrati JSON vsech aut z databaze.
-     *
-     * @return string
-     */
-    public function fetchAllCarsJson() {
-        $query = $this->database->prepare('SELECT * FROM `car`');
-        $query->setFetchMode(PDO::FETCH_ASSOC);
-        $query->execute();
-        $cars = $query->fetchAll();
-        return json_encode($cars);
     }
 
     /**
