@@ -36,7 +36,7 @@ class CarOperation {
         $car_id = $this->database->insertCar($car);
 
         if ($normalize and is_int($car_id)) {
-            $this->normalize();
+            $this->normalizeCarsToDb();
         }
 
         return $car_id;
@@ -47,7 +47,7 @@ class CarOperation {
      *
      * @throws NormalizationErrorException
      */
-    public function normalize() {
+    public function normalizeCarsToDb() {
         foreach (Car::PARAMS as $param) {
             if (!$this->normalizeParam($param)) {
                 throw new NormalizationErrorException($param);
@@ -117,6 +117,35 @@ class CarOperation {
      */
     public function getCarById($id) {
         return $this->database->fetchCar($id);
+    }
+
+    /**
+     * Normalizuje predane parametry u predanych aut a vrati je v asociativnim poli.
+     *
+     * @param Car[]    $cars
+     * @param string[] $params
+     * @return array
+     * @throws \Fagin\Exception\InvalidParamException
+     */
+    public function normalizeCarsToArray($cars, $params) {
+        $normalizedCars = array();
+        $min = array();
+        $max = array();
+
+        foreach ($params as $param) {
+            $max[$param] = $this->database->getCarMaxParam($param);
+            $min[$param] = $this->database->getCarMinParam($param);
+        }
+
+        foreach ($cars as $car) {
+            $normalizedCars[$car->getId()] = array();
+
+            foreach ($params as $param) {
+                $normalizedCars[$car->getId()][$param] = $this->normalizeValue($car->getParam($param), $param, $min[$param], $max[$param]);
+            }
+        }
+
+        return $normalizedCars;
     }
 
 }

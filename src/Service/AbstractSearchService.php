@@ -54,4 +54,19 @@ abstract class AbstractSearchService {
 
         return array_sum($values) / count($values);
     }
+
+    /**
+     * Komparator pro razeni aut podle agregovanych hodnot sestupne.
+     *
+     * @param array $a
+     * @param array $b
+     * @return int
+     */
+    protected static function sortCarsDesc($a, $b) {
+        if ($a['aggregation'] < $b['aggregation']) {
+            return 1;
+        }
+
+        return -1;
+    }
 }

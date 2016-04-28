@@ -42,3 +42,27 @@
 [28-04-2016 01:24:12] EVENT (127.0.0.1) 0.005ms Return from getProductsForAggregation.
 [28-04-2016 01:24:12] EVENT (127.0.0.1) 13.181ms Sorting cars
 [28-04-2016 01:24:12] EVENT (127.0.0.1) 263.026ms Get final top 3200 products.
+[28-04-2016 19:04:43] EVENT (127.0.0.1) 141.186ms FAGIN - Getting normalized table for params: volume, power.
+[28-04-2016 19:04:43] EVENT (127.0.0.1) 0.27ms FAGIN - Getting 4 complete products.
+[28-04-2016 19:04:43] EVENT (127.0.0.1) 0.063ms FAGIN - Getting cross links
+[28-04-2016 19:04:43] EVENT (127.0.0.1) 0.083ms FAGIN - Calculating aggregated values
+[28-04-2016 19:04:43] EVENT (127.0.0.1) 0.087ms FAGIN - Sorting cars
+[28-04-2016 19:04:43] EVENT (127.0.0.1) 25.126ms FAGIN - Get final top 4 products.
+[28-04-2016 19:04:55] EVENT (127.0.0.1) 85.35ms FAGIN - Getting normalized table for params: volume, power.
+[28-04-2016 19:04:55] EVENT (127.0.0.1) 0.216ms FAGIN - Getting 4 complete products.
+[28-04-2016 19:04:55] EVENT (127.0.0.1) 0.054ms FAGIN - Getting cross links
+[28-04-2016 19:04:55] EVENT (127.0.0.1) 0.073ms FAGIN - Calculating aggregated values
+[28-04-2016 19:04:55] EVENT (127.0.0.1) 0.077ms FAGIN - Sorting cars
+[28-04-2016 19:04:55] EVENT (127.0.0.1) 2.897ms FAGIN - Get final top 4 products.
+[28-04-2016 19:04:57] EVENT (127.0.0.1) 61.733ms FAGIN - Getting normalized table for params: volume, power.
+[28-04-2016 19:04:57] EVENT (127.0.0.1) 0.254ms FAGIN - Getting 4 complete products.
+[28-04-2016 19:04:57] EVENT (127.0.0.1) 0.06ms FAGIN - Getting cross links
+[28-04-2016 19:04:57] EVENT (127.0.0.1) 0.081ms FAGIN - Calculating aggregated values
+[28-04-2016 19:04:57] EVENT (127.0.0.1) 0.087ms FAGIN - Sorting cars
+[28-04-2016 19:04:57] EVENT (127.0.0.1) 5.118ms FAGIN - Get final top 4 products.
+[28-04-2016 19:04:58] EVENT (127.0.0.1) 93.823ms FAGIN - Getting normalized table for params: volume, power.
+[28-04-2016 19:04:58] EVENT (127.0.0.1) 0.253ms FAGIN - Getting 4 complete products.
+[28-04-2016 19:04:58] EVENT (127.0.0.1) 0.063ms FAGIN - Getting cross links
+[28-04-2016 19:04:58] EVENT (127.0.0.1) 0.084ms FAGIN - Calculating aggregated values
+[28-04-2016 19:04:58] EVENT (127.0.0.1) 0.089ms FAGIN - Sorting cars
+[28-04-2016 19:04:58] EVENT (127.0.0.1) 2.784ms FAGIN - Get final top 4 products.
