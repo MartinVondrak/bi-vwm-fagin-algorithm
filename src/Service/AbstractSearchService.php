@@ -8,9 +8,10 @@
 
 namespace Fagin\Service;
 
-
+use Fagin\Data\Car;
 use Fagin\Data\Database;
 use Fagin\Exception\InvalidParamException;
+use Fagin\Exception\InvalidAggregationFunctionException;
 
 abstract class AbstractSearchService {
 
@@ -53,6 +54,63 @@ abstract class AbstractSearchService {
         }
 
         return array_sum($values) / count($values);
+    }
+
+    /**
+     * Agreguje jednotlive parametry auta a seradi je.
+     *
+     * @param array  $cars
+     * @param string $aggregationFunction
+     * @return array
+     * @throws InvalidAggregationFunctionException
+     * @throws InvalidParamException
+     */
+    protected function aggregateAndSortProducts($cars, $aggregationFunction) {
+        $this->timeLogger->start();
+
+        foreach ($cars as $id => $params) {
+            switch ($aggregationFunction) {
+                case self::MAX:
+                    $aggregatedValues = max($params);
+                    break;
+                case self::MIN:
+                    $aggregatedValues = min($params);
+                    break;
+                case self::AVG:
+                    $aggregatedValues = $this->avg($params);
+                    break;
+                default:
+                    throw new InvalidAggregationFunctionException($aggregationFunction);
+                    break;
+            }
+
+            $cars[$id]['aggregation'] = $aggregatedValues;
+        }
+
+        $this->timeLogger->stop('Calculating aggregated values');
+        $this->timeLogger->start();
+        uasort($cars, array('self', 'sortCarsDesc'));
+        $this->timeLogger->stop('Sorting cars');
+        return $cars;
+    }
+
+    /**
+     * Vrati pole k nejlepsich aut ze $sorted pole.
+     *
+     * @param array $sorted
+     * @param int   $k
+     * @return Car[]
+     */
+    protected function getTopKCars($sorted, $k) {
+        $carIds = array();
+        reset($sorted);
+
+        for ($i = 0; $i < $k; $i++) {
+            $carIds[] = key($sorted);
+            next($sorted);
+        }
+
+        return $this->database->fetchCarByIds($carIds);
     }
 
     /**

@@ -32,44 +32,20 @@ class LinearSearchService extends AbstractSearchService {
      * @param string[] $params
      * @param int      $k
      * @param string   $aggregation
-     * @return Car[]|string
+     * @return Car[]
      */
     public function getKProductsWithParams($params, $k, $aggregation) {
+        $this->timeLogger->logMessage('--------- LINEAR ---------');
         $this->timeLogger->start();
         $cars = $this->database->fetchAllCars();
-        $this->timeLogger->stop('LINEAR - Get all cars.');
+        $this->timeLogger->stop('Get all cars.');
         $this->timeLogger->start();
         $normalizedCars = $this->carOperation->normalizeCarsToArray($cars, $params);
-        $this->timeLogger->stop('LINEAR - Normalize all cars.');
-        $sortedCars = $this->aggregateAndSortProducts($cars, $aggregation);
-    }
-
-    private function aggregateAndSortProducts($cars, $aggregationFunction) {
+        $this->timeLogger->stop('Normalize all cars.');
+        $sortedCars = $this->aggregateAndSortProducts($normalizedCars, $aggregation);
         $this->timeLogger->start();
-
-        foreach ($cars as $id => $params) {
-            switch ($aggregationFunction) {
-                case self::MAX:
-                    $aggregatedValues = max($params);
-                    break;
-                case self::MIN:
-                    $aggregatedValues = min($params);
-                    break;
-                case self::AVG:
-                    $aggregatedValues = $this->avg($params);
-                    break;
-                default:
-                    throw new InvalidAggregationFunctionException($aggregationFunction);
-                    break;
-            }
-
-            $cars[$id]['aggregation'] = $aggregatedValues;
-        }
-
-        $this->timeLogger->stop('LINEAR - Calculating aggregated values');
-        $this->timeLogger->start();
-        uasort($cars, array('self', 'sortCarsDesc'));
-        $this->timeLogger->stop('LINEAR - Sorting cars');
+        $cars = $this->getTopKCars($sortedCars, $k);
+        $this->timeLogger->stop('Get final top ' . $k . ' products.');
         return $cars;
     }
 }

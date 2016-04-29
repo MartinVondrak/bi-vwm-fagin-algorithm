@@ -25,10 +25,12 @@ class FaginSearchService extends AbstractSearchService {
      * @return Car[]|string
      */
     public function getKProductsWithParams($params, $k, $aggregation) {
+        $this->timeLogger->logMessage('--------- FAGIN ---------');
+
         try {
             $this->timeLogger->start();
             $normalizedTables = $this->getNormalizedTablesForParams($params);
-            $this->timeLogger->stop('FAGIN - Getting normalized table for params: ' . implode(', ', $params) . '.');
+            $this->timeLogger->stop('Getting normalized table for params: ' . implode(', ', $params) . '.');
         } catch (InvalidParamException $ex) {
             return $ex->getMessage();
         }
@@ -45,65 +47,7 @@ class FaginSearchService extends AbstractSearchService {
 
         $this->timeLogger->start();
         $cars = $this->getTopKCars($sortedCars, $k);
-        $this->timeLogger->stop('FAGIN - Get final top ' . $k . ' products.');
-        return $cars;
-    }
-
-    /**
-     * Vrati pole k nejlepsich aut ze $sorted pole.
-     *
-     * @param array $sorted
-     * @param int   $k
-     * @return Car[]
-     */
-    private function getTopKCars($sorted, $k) {
-        $carIds = array();
-        reset($sorted);
-
-        for ($i = 0; $i < $k; $i++) {
-            $carIds[] = key($sorted);
-            next($sorted);
-        }
-
-        $cars = $this->database->fetchCarByIds($carIds);
-        return $cars;
-    }
-
-    /**
-     * Agreguje jednotlive parametry auta a seradi je.
-     *
-     * @param array  $cars
-     * @param string $aggregationFunction
-     * @return array
-     * @throws InvalidAggregationFunctionException
-     * @throws InvalidParamException
-     */
-    private function aggregateAndSortProducts($cars, $aggregationFunction) {
-        $this->timeLogger->start();
-
-        foreach ($cars as $id => $params) {
-            switch ($aggregationFunction) {
-                case self::MAX:
-                    $aggregatedValues = max($params);
-                    break;
-                case self::MIN:
-                    $aggregatedValues = min($params);
-                    break;
-                case self::AVG:
-                    $aggregatedValues = $this->avg($params);
-                    break;
-                default:
-                    throw new InvalidAggregationFunctionException($aggregationFunction);
-                    break;
-            }
-
-            $cars[$id]['aggregation'] = $aggregatedValues;
-        }
-
-        $this->timeLogger->stop('FAGIN - Calculating aggregated values');
-        $this->timeLogger->start();
-        uasort($cars, array('self', 'sortCarsDesc'));
-        $this->timeLogger->stop('FAGIN - Sorting cars');
+        $this->timeLogger->stop('Get final top ' . $k . ' products.');
         return $cars;
     }
 
@@ -147,7 +91,7 @@ class FaginSearchService extends AbstractSearchService {
             $index++;
         }
 
-        $this->timeLogger->stop('FAGIN - Getting ' . $k . ' complete products.');
+        $this->timeLogger->stop('Getting ' . $k . ' complete products.');
         $this->timeLogger->start();
 
         foreach ($params as $param) {
@@ -158,7 +102,7 @@ class FaginSearchService extends AbstractSearchService {
             }
         }
 
-        $this->timeLogger->stop('FAGIN - Getting cross links');
+        $this->timeLogger->stop('Getting cross links');
         return $carArray;
     }
 
