@@ -12,8 +12,19 @@ use Fagin\Data\Car;
 use Fagin\Data\Database;
 use Fagin\Exception\InvalidParamException;
 use Fagin\Exception\InvalidAggregationFunctionException;
+use Fagin\Exception\InvalidTopKException;
 
 abstract class AbstractSearchService {
+
+    /** Dostupne vyhledavaci algoritmy */
+    const LINEAR = 'seq';
+    const FAGIN = 'fagin';
+
+    /** @var array ALGORITHMS */
+    const ALGORITHMS = array(
+        self::LINEAR,
+        self::FAGIN
+    );
 
     /** Dostupne agregacni funkce */
     const MIN = 'min';
@@ -50,7 +61,7 @@ abstract class AbstractSearchService {
      */
     protected function avg($values) {
         if (!is_array($values) or empty($values)) {
-            throw new InvalidParamException('Expected non-empty array ' . gettype($values) . 'given.');
+            throw new InvalidParamException('Expected non-empty array ' . gettype($values) . ' given.');
         }
 
         return array_sum($values) / count($values);
@@ -126,5 +137,26 @@ abstract class AbstractSearchService {
         }
 
         return -1;
+    }
+
+    /**
+     * Zkontroluje jestli je top K cislo a pokud je vetsi nez pocet produktu v databazi zmensi ho.
+     *
+     * @param mixed $k
+     * @return int
+     * @throws InvalidTopKException
+     */
+    protected function validateTopK($k) {
+        if (!is_numeric($k)) {
+            throw new InvalidTopKException('Expected numeric top K ' . gettype($k) . ' given.');
+        }
+
+        $carCount = $this->database->countCars();
+
+        if ($k > $carCount) {
+            $k = $carCount;
+        }
+
+        return intval($k);
     }
 }

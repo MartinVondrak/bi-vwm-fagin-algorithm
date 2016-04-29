@@ -12,6 +12,7 @@ namespace Fagin\Service;
 use Fagin\Data\Car;
 use Fagin\Exception\InvalidParamException;
 use Fagin\Exception\InvalidAggregationFunctionException;
+use Fagin\Exception\InvalidTopKException;
 
 class FaginSearchService extends AbstractSearchService {
 
@@ -22,29 +23,18 @@ class FaginSearchService extends AbstractSearchService {
      * @param string[] $params
      * @param int      $k
      * @param string   $aggregation
-     * @return Car[]|string
+     * @return Car[]
+     * @throws InvalidAggregationFunctionException
+     * @throws InvalidTopKException;
      */
     public function getKProductsWithParams($params, $k, $aggregation) {
+        $k = $this->validateTopK($k);
         $this->timeLogger->logMessage('--------- FAGIN ---------');
-
-        try {
-            $this->timeLogger->start();
-            $normalizedTables = $this->getNormalizedTablesForParams($params);
-            $this->timeLogger->stop('Getting normalized table for params: ' . implode(', ', $params) . '.');
-        } catch (InvalidParamException $ex) {
-            return $ex->getMessage();
-        }
-
+        $this->timeLogger->start();
+        $normalizedTables = $this->getNormalizedTablesForParams($params);
+        $this->timeLogger->stop('Getting normalized table for params: ' . implode(', ', $params) . '.');
         $carsForAggregation = $this->getProductsForAggregation($normalizedTables, $k, count($params), $params);
-
-        try {
-            $sortedCars = $this->aggregateAndSortProducts($carsForAggregation, $aggregation);
-        } catch (InvalidAggregationFunctionException $ex) {
-            return $ex->getMessage();
-        } catch (InvalidParamException $ex) {
-            return $ex->getMessage();
-        }
-
+        $sortedCars = $this->aggregateAndSortProducts($carsForAggregation, $aggregation);
         $this->timeLogger->start();
         $cars = $this->getTopKCars($sortedCars, $k);
         $this->timeLogger->stop('Get final top ' . $k . ' products.');

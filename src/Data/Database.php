@@ -198,12 +198,15 @@ class Database {
     }
 
     /**
-     * Vrati pripojeni do DB.
+     * Vrati pocet vsech aut v databazi.
      *
-     * @return PDO
+     * @return int
      */
-    public function getDatabase() {
-        return $this->database;
+    public function countCars() {
+        $query = $this->database->prepare('SELECT COUNT(*) FROM `car`');
+        $query->execute();
+        $carCount = $query->fetch();
+        return $carCount[0];
     }
 
     /**

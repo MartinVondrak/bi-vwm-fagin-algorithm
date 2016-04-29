@@ -11,6 +11,7 @@ namespace Fagin\Service;
 
 use Fagin\Data\Car;
 use Fagin\Exception\InvalidAggregationFunctionException;
+use Fagin\Exception\InvalidTopKException;
 
 class LinearSearchService extends AbstractSearchService {
 
@@ -33,8 +34,11 @@ class LinearSearchService extends AbstractSearchService {
      * @param int      $k
      * @param string   $aggregation
      * @return Car[]
+     * @throws InvalidAggregationFunctionException
+     * @throws InvalidTopKException
      */
     public function getKProductsWithParams($params, $k, $aggregation) {
+        $k = $this->validateTopK($k);
         $this->timeLogger->logMessage('--------- LINEAR ---------');
         $this->timeLogger->start();
         $cars = $this->database->fetchAllCars();
