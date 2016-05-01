@@ -38,8 +38,11 @@ elseif (count($uri) == 3) {
         elseif ($uri[1] == "vyhledat") {
             echo $algorithmController->findFormAction();
         }
-        elseif ($uri[1] == "vlozit") {
+        elseif ($uri[1] == "vlozit-automobil") {
             echo $carController->insertAction();
+        }
+        elseif ($uri[1] == "o-projektu") {
+            echo $staticController->aboutAction();
         }
         else {
             echo $staticController->response(404);
