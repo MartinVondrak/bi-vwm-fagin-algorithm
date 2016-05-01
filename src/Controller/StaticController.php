@@ -22,4 +22,13 @@ class StaticController extends Controller
         return $this->render("static/index.html.twig");
     }
 
+    /**
+     * Vyrenderuje stranku o projektu
+     *
+     * @return mixed
+     */
+    public function aboutAction() {
+        return $this->render("static/about.html.twig");
+    }
+
 }
