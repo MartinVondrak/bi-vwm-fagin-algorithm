@@ -1,0 +1,208 @@
+{% extends "base.html.twig" %}
+{% block title %}Vložit automobil{% endblock %}
+
+{% block body %}
+    {% include "layout/header.html.twig" %}
+
+    <div class="container">
+        <h1>Vložit automobil</h1>
+
+        {% if chyba is empty %}
+            <div role="alert" class="alert alert-danger">Je prázdná</div>
+        {% endif %}
+
+        <form role="form" method="post" id="insert-form">
+            <div class="form-group insert-form">
+                <div class="row">
+                    <div class="col-sm-2 input-text">
+                        <label for="name">Název</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" name="name" value="{{ car.name }}" class="form-control long">
+                        <span id="nameError" class="form-error"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 input-text">
+                        <label for="volume">Obsah</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" name="volume" value="{{ car.volume }}" placeholder="cmm" class="form-control short">
+                        <span id="volumeError" class="form-error"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 input-text">
+                        <label for="power">Výkon</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" name="power" value="{{ car.power }}" placeholder="kW" class="form-control short">
+                        <span id="powerError" class="form-error"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 input-text">
+                        <label for="mileage">Tachometr</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" name="mileage" value="{{ car.mileage }}" placeholder="km" class="form-control short">
+                        <span id="mileageError" class="form-error"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 input-text">
+                        <label for="manufacture_year">Rok výroby</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" name="manufacture_year" value="{{ car.manufacture_year }}" class="form-control short">
+                        <span id="manufacture_yearError" class="form-error"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 input-text">
+                        <label for="top_speed">Max. rychlost</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" name="top_speed" value="{{ car.top_speed }}" placeholder="km/h" class="form-control short">
+                        <span id="top_speedError" class="form-error"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 input-text">
+                        <label for="acceleration">Zrychlení</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" name="acceleration" value="{{ car.acceleration }}" placeholder="s" class="form-control short">
+                        <span id="accelerationError" class="form-error"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 input-text">
+                        <label for="price">Cena</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" name="price" value="{{ car.price }}" placeholder="Kč" class="form-control short">
+                        <span id="priceError" class="form-error"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" id="send-form" class="btn btn-default">Vložit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function() {
+
+            function validateForm(event) {
+                event.preventDefault();
+
+                $("#insert-form").validate({
+                    errorPlacement: function(error, element) {
+                        if (element.attr("name") == "name") {
+                            error.appendTo($("#nameError"));
+                        }
+                        if (element.attr("name") == "volume") {
+                            error.appendTo($("#volumeError"));
+                        }
+                        if (element.attr("name") == "power") {
+                            error.appendTo($("#powerError"));
+                        }
+                        if (element.attr("name") == "mileage") {
+                            error.appendTo($("#mileageError"));
+                        }
+                        if (element.attr("name") == "manufacture_year") {
+                            error.appendTo($("#manufacture_yearError"));
+                        }
+                        if (element.attr("name") == "top_speed") {
+                            error.appendTo($("#top_speedError"));
+                        }
+                        if (element.attr("name") == "acceleration") {
+                            error.appendTo($("#accelerationError"));
+                        }
+                        if (element.attr("name") == "price") {
+                            error.appendTo($("#priceError"));
+                        }
+                    },
+                    rules: {
+                        name: {
+                            required: true
+                        },
+                        volume: {
+                            required: true,
+                            digits: true
+                        },
+                        power: {
+                            required: true,
+                            digits: true
+                        },
+                        mileage: {
+                            required: true,
+                            digits: true
+                        },
+                        manufacture_year: {
+                            required: true,
+                            digits: true
+                        },
+                        top_speed: {
+                            required: true,
+                            digits: true
+                        },
+                        acceleration: {
+                            required: true,
+                            digits: true
+                        },
+                        price: {
+                            required: true,
+                            digits: true
+                        }
+                    },
+                    messages: {
+                        name: {
+                            required: "* vyplňte název auta"
+                        },
+                        volume: {
+                            required: "* vyplňte obsah motoru auta",
+                            digits: "* musí být číslo"
+                        },
+                        power: {
+                            required: "* vyplňte výkon motoru auta",
+                            digits: "* musí být číslo"
+                        },
+                        mileage: {
+                            required: "* vyplňte tachometr auta",
+                            digits: "* musí být číslo"
+                        },
+                        manufacture_year: {
+                            required: "* vyplňte rok výroby auta",
+                            digits: "* musí být číslo"
+                        },
+                        top_speed: {
+                            required: "* vyplňte maximální rychlost auta",
+                            digits: "* musí být číslo"
+                        },
+                        acceleration: {
+                            required: "* vyplňte zrychlení auta",
+                            digits: "* musí být číslo"
+                        },
+                        price: {
+                            required: "* vyplňte cenu auta",
+                            digits: "* musí být číslo"
+                        }
+                    }
+                });
+            }
+
+            $("#insert-form").submit(validateForm(event));
+        });
+    </script>
+{% endblock %}

@@ -138,9 +138,25 @@ div#menu.navbar-collapse.collapse, div#menu.navbar-collapse.collapse.in {
 }
 
 input[type="text"] {
-    width: 100px;
+    display: inline;
 }
 
-input[type="text"]#top_k {
-    display: inline;
+input[type="text"].short {
+    width: 100px;
+}
+input[type="text"].long {
+    width: 300px;
+}
+
+.row {
+    margin-bottom: 5px;
+}
+
+.row div.col-sm-2 {
+    text-align: right;
+}
+
+.input-text {
+    height: 34px;
+    padding-top: 6px;
 }

@@ -605,3 +605,31 @@
 [01-05-2016 16:06:44] EVENT (127.0.0.1) 8.076ms Calculating aggregated values
 [01-05-2016 16:06:44] EVENT (127.0.0.1) 22.013ms Sorting cars
 [01-05-2016 16:06:44] EVENT (127.0.0.1) 80.519ms Get final top 1000 products.
+[01-05-2016 16:43:02] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[01-05-2016 16:43:03] EVENT (127.0.0.1) 383.68ms Getting normalized table for params: volume, power, mileage, manufacture_year, top_speed, acceleration, price.
+[01-05-2016 16:43:03] EVENT (127.0.0.1) 268.417ms Getting 1 complete products.
+[01-05-2016 16:43:03] EVENT (127.0.0.1) 36.864ms Getting cross links
+[01-05-2016 16:43:03] EVENT (127.0.0.1) 16.451ms Calculating aggregated values
+[01-05-2016 16:43:03] EVENT (127.0.0.1) 14.767ms Sorting cars
+[01-05-2016 16:43:03] EVENT (127.0.0.1) 19.254ms Get final top 1 products.
+[01-05-2016 16:43:40] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[01-05-2016 16:43:40] EVENT (127.0.0.1) 92.176ms Getting normalized table for params: volume.
+[01-05-2016 16:43:40] EVENT (127.0.0.1) 0.024ms Getting 1 complete products.
+[01-05-2016 16:43:40] EVENT (127.0.0.1) 0.005ms Getting cross links
+[01-05-2016 16:43:40] EVENT (127.0.0.1) 0.013ms Calculating aggregated values
+[01-05-2016 16:43:40] EVENT (127.0.0.1) 0.018ms Sorting cars
+[01-05-2016 16:43:41] EVENT (127.0.0.1) 16.394ms Get final top 1 products.
+[01-05-2016 16:44:02] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[01-05-2016 16:44:02] EVENT (127.0.0.1) 72.193ms Getting normalized table for params: volume.
+[01-05-2016 16:44:02] EVENT (127.0.0.1) 0.025ms Getting 1 complete products.
+[01-05-2016 16:44:02] EVENT (127.0.0.1) 0.005ms Getting cross links
+[01-05-2016 16:44:02] EVENT (127.0.0.1) 0.013ms Calculating aggregated values
+[01-05-2016 16:44:02] EVENT (127.0.0.1) 0.018ms Sorting cars
+[01-05-2016 16:44:02] EVENT (127.0.0.1) 18.892ms Get final top 1 products.
+[01-05-2016 16:44:23] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[01-05-2016 16:44:23] EVENT (127.0.0.1) 97.274ms Getting normalized table for params: volume.
+[01-05-2016 16:44:23] EVENT (127.0.0.1) 2.125ms Getting 200 complete products.
+[01-05-2016 16:44:23] EVENT (127.0.0.1) 0.054ms Getting cross links
+[01-05-2016 16:44:23] EVENT (127.0.0.1) 0.305ms Calculating aggregated values
+[01-05-2016 16:44:23] EVENT (127.0.0.1) 1.178ms Sorting cars
+[01-05-2016 16:44:23] EVENT (127.0.0.1) 24.759ms Get final top 200 products.
