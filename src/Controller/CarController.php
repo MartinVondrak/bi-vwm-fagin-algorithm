@@ -44,6 +44,11 @@ class CarController extends Controller {
         return $this->render("car/detail.html.twig", array("car" => $car));
     }
 
+    /**
+     * Vyrenderuje stranku pro vkladani aut
+     *
+     * @return mixed|string
+     */
     public function insertAction() {
         if ($_POST) {
             try{
@@ -54,7 +59,6 @@ class CarController extends Controller {
                 header(self::CODES[400]);
                 return $this->render("car/insert.html.twig", array("car" => $car, "error" => $ex->getMessage()));
             }
-            $_SERVER["REQUEST_URI"] = "/car/".$car_id."/";
             return $this->detailAction($car_id);
         }
         else {
