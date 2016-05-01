@@ -11,6 +11,7 @@ namespace Fagin\Service;
 
 use Fagin\Data\Car;
 use Fagin\Data\Database;
+use Fagin\Exception\InvalidParamException;
 use Fagin\Exception\NormalizationErrorException;
 
 class CarOperation {
@@ -26,16 +27,43 @@ class CarOperation {
     }
 
     /**
+     * Vytvori entitu Car
+     *
+     * @param $name
+     * @param $volume
+     * @param $power
+     * @param $mileage
+     * @param $manufacture_year
+     * @param $top_speed
+     * @param $acceleration
+     * @param $price
+     * @return Car
+     */
+    public function createCar($name, $volume, $power, $mileage, $manufacture_year, $top_speed, $acceleration, $price) {
+        $car = new Car();
+        $car->setName($this->transformInput($name));
+        $car->setVolume($this->transformInput($volume));
+        $car->setPower($this->transformInput($power));
+        $car->setMileage($this->transformInput($mileage));
+        $car->setManufactureYear($this->transformInput($manufacture_year));
+        $car->setTopSpeed($this->transformInput($top_speed));
+        $car->setAcceleration($this->transformInput($acceleration));
+        $car->setPrice($this->transformInput($price));
+        return $car;
+    }
+
+    /**
      * Vlozi auto do DB a pripadne normalizuje tabulky.
      *
-     * @param Car  $car
      * @param bool $normalize
      * @return int|null
      */
     public function insertCar(Car $car, $normalize = false) {
+
+        $this->validateCar($car);
         $car_id = $this->database->insertCar($car);
 
-        if ($normalize and is_int($car_id)) {
+        if ($normalize and preg_match("/^\d*/",$car_id)) {
             $this->normalizeCarsToDb();
         }
 
@@ -146,6 +174,53 @@ class CarOperation {
         }
 
         return $normalizedCars;
+    }
+
+    /**
+     * Zvaliduje entitu Car
+     *
+     * @param Car $car
+     * @throws InvalidParamException
+     */
+    private function validateCar($car) {
+        if (empty($car->getName())) {
+            throw new InvalidParamException("Invalid name.");
+        }
+        if (empty($car->getVolume()) || !preg_match("/^\d*$/",$car->getVolume())) {
+            var_dump($car->getVolume());
+            throw new InvalidParamException("Invalid volume.");
+        }
+        if (empty($car->getPower()) || !preg_match("/^\d*$/",$car->getPower())) {
+            throw new InvalidParamException("Invalid power.");
+        }
+        if (empty($car->getMileage()) || !preg_match("/^\d*$/",$car->getMileage())) {
+            throw new InvalidParamException("Invalid mileage.");
+        }
+        if (empty($car->getManufactureYear()) || !preg_match("/^\d*$/",$car->getManufactureYear())) {
+            throw new InvalidParamException("Invalid manufacture year.");
+        }
+        if (empty($car->getTopSpeed()) || !preg_match("/^\d*$/",$car->getTopSpeed())) {
+            throw new InvalidParamException("Invalid top speed.");
+        }
+        if (empty($car->getAcceleration()) || !preg_match("/^\d*\.?\d*$/",$car->getAcceleration())) {
+            throw new InvalidParamException("Invalid acceleration.");
+        }
+        if (empty($car->getPrice()) || !preg_match("/^\d*$/",$car->getPrice())) {
+            throw new InvalidParamException("Invalid price.");
+        }
+    }
+
+    /**
+     * Otestuje vstup
+     *
+     * @param $data
+     * @return string
+     */
+    private function transformInput($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
 
 }

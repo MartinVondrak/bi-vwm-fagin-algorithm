@@ -8,6 +8,8 @@
 
 namespace Fagin\Controller;
 
+use Fagin\Exception\InvalidParamException;
+use Fagin\Exception\InvalidTopKException;
 use Fagin\Service\CarOperation;
 
 class CarController extends Controller {
@@ -43,11 +45,21 @@ class CarController extends Controller {
     }
 
     public function insertAction() {
-        print_r($_POST);
         if ($_POST) {
-            echo "Not empty";
+            try{
+                $car = $this->carOperation->createCar($_POST["name"],$_POST["volume"],$_POST["power"],$_POST["mileage"],
+                    $_POST["manufacture_year"],$_POST["top_speed"],$_POST["acceleration"],$_POST["price"]);
+                $car_id = $this->carOperation->insertCar($car,true);
+            } catch (InvalidParamException $ex) {
+                header(self::CODES[400]);
+                return $this->render("car/insert.html.twig", array("car" => $car, "error" => $ex->getMessage()));
+            }
+            $_SERVER["REQUEST_URI"] = "/car/".$car_id."/";
+            return $this->detailAction($car_id);
         }
-        return $this->render("car/insert.html.twig", array("car" => NULL));
+        else {
+            return $this->render("car/insert.html.twig");
+        }
     }
 
 }
