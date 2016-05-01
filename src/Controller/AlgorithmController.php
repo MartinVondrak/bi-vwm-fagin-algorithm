@@ -8,22 +8,25 @@
 
 namespace Fagin\Controller;
 
-use Fagin\Data\Car;
 use Fagin\Exception\InvalidAggregationFunctionException;
 use Fagin\Exception\InvalidParamException;
 use Fagin\Exception\InvalidTopKException;
 use Fagin\Service\AbstractSearchService;
 use Fagin\Service\CarOperation;
 use Fagin\Service\FaginSearchService;
+use Fagin\Service\LinearSearchService;
 
 
-class FaginController extends Controller {
+class AlgorithmController extends Controller {
 
     /** @var CarOperation $carOperation */
     private $carOperation;
 
     /** @var FaginSearchService $faginService */
     private $faginService;
+
+    /** @var LinearSearchService $faginService */
+    private $linearService;
 
     /**
      * FaginController konstruktor.
@@ -34,6 +37,7 @@ class FaginController extends Controller {
         parent::__construct($twig);
         $this->carOperation = new CarOperation();
         $this->faginService = new FaginSearchService();
+        $this->linearService = new LinearSearchService();
     }
 
     /**
@@ -42,7 +46,7 @@ class FaginController extends Controller {
      * @return mixed
      */
     public function findFormAction() {
-        return $this->render('fagin/find.html.twig');
+        return $this->render('algorithm/find.html.twig');
     }
 
     /**
@@ -62,7 +66,17 @@ class FaginController extends Controller {
      */
     public function findCarsAction() {
         try {
-            $cars = json_encode($this->faginService->getKProductsWithParams(explode(",", $_POST["params"]), $_POST["top_k"], $_POST["aggregation"]));
+            switch ($_POST["algorithm"]) {
+                case AbstractSearchService::FAGIN:
+                    $cars = json_encode($this->faginService->getKProductsWithParams(explode(",", $_POST["params"]), $_POST["top_k"], $_POST["aggregation"]));
+                    break;
+                case AbstractSearchService::LINEAR:
+                    $cars = json_encode($this->linearService->getKProductsWithParams(explode(",", $_POST["params"]), $_POST["top_k"], $_POST["aggregation"]));
+                    break;
+                default:
+                    header(self::CODES[400]);
+                    return json_encode("Invalid algorithm");
+            }
         } catch (InvalidAggregationFunctionException $ex) {
             header(self::CODES[400]);
             return json_encode($ex->getMessage());
@@ -75,7 +89,6 @@ class FaginController extends Controller {
             header(self::CODES[400]);
             return json_encode($ex->getMessage());
         }
-
         return $cars;
     }
 

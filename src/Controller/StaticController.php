@@ -9,8 +9,24 @@
 namespace Fagin\Controller;
 
 
+use Fagin\Service\CarOperation;
+
 class StaticController extends Controller
 {
+
+    /** @var CarOperation $carOperation */
+    private $carOperation;
+
+    /**
+     * StaticController konstruktor.
+     *
+     * @param \Twig_Environment $twig
+     */
+    public function __construct($twig) {
+        parent::__construct($twig);
+        $this->carOperation = new CarOperation();
+    }
+
     /**
      * Vyrenderuje hlavni stranku
      *
@@ -34,7 +50,7 @@ class StaticController extends Controller
         if ($car == null) {
             return $this->response(404);
         }
-        return $this->render('fagin/car-detail.html.twig', array('car' => $car));
+        return $this->render('algorithm/car-detail.html.twig', array('car' => $car));
     }
 
 }
