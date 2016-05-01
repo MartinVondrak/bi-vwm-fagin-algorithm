@@ -3,3 +3,6 @@
 
 # Ignore library folder
 vendor
+
+# Ignore logs folder
+logs
