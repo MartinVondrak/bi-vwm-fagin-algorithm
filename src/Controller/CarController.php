@@ -10,6 +10,7 @@ namespace Fagin\Controller;
 
 use Fagin\Exception\InvalidParamException;
 use Fagin\Exception\InvalidTopKException;
+use Fagin\Exception\NormalizationErrorException;
 use Fagin\Service\CarOperation;
 
 class CarController extends Controller {
@@ -51,19 +52,30 @@ class CarController extends Controller {
      */
     public function insertAction() {
         if ($_POST) {
-            try{
-                $car = $this->carOperation->createCar($_POST["name"],$_POST["volume"],$_POST["power"],$_POST["mileage"],
-                    $_POST["manufacture_year"],$_POST["top_speed"],$_POST["acceleration"],$_POST["price"]);
-                $car_id = $this->carOperation->insertCar($car,true);
+            try {
+                $car = $this->carOperation->createCar($_POST["name"], $_POST["volume"], $_POST["power"], $_POST["mileage"],
+                    $_POST["manufacture_year"], $_POST["top_speed"], $_POST["acceleration"], $_POST["price"]);
+                $car_id = $this->carOperation->insertCar($car, true);
             } catch (InvalidParamException $ex) {
                 header(self::CODES[400]);
                 return $this->render("car/insert.html.twig", array("car" => $car, "error" => $ex->getMessage()));
             }
             return $this->detailAction($car_id);
-        }
-        else {
+        } else {
             return $this->render("car/insert.html.twig");
         }
+    }
+
+
+    public function normalizeAction() {
+        try {
+            $this->carOperation->normalizeCarsToDb();
+        } catch (NormalizationErrorException $ex) {
+            header(self::CODES[400]);
+            return json_encode($ex->getMessage());
+        }
+
+        return json_encode(array("success" => true));
     }
 
 }

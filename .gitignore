@@ -6,3 +6,6 @@ vendor
 
 # Ignore logs folder
 logs
+
+# Ignore configuration files
+config.ini

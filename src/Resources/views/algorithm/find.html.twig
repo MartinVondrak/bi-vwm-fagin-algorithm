@@ -186,12 +186,12 @@
                     },
                     messages: {
                         algorithm: "* vyberte typ algoritmu",
-                        aggregation: "* vyberte agregacni funkci",
+                        aggregation: "* vyberte agregační funkci",
                         top_k: {
-                            required: "* vyplnte pocet top_k vysledku",
-                            digits: "* musi byt cislo"
+                            required: "* vyplňte počet top K výsledků",
+                            digits: "* top K musí být číslo"
                         },
-                        params: "* vyberte alespon jeden parametr"
+                        params: "* vyberte alespoň jeden parametr"
                     },
                     submitHandler: function () {
                         getData();
@@ -218,32 +218,32 @@
                 var startTime = new Date().getTime();
 
                 $.when(
-                        $.ajax({
-                            type: "POST",
-                            url: "/api/find-cars/",
-                            dataType: "json",
-                            data: $("#fagin-form").serialize(),
-                            success: function (data) {
-                                endTime = new Date().getTime() - startTime;
-                                $.each(data, function (index, car) {
-                                    carsToInput += "<tr>";
-                                    carsToInput += "<td><a href='/car/" + car.id + "/'>" + car.name + "</a></td>";
-                                    carsToInput += "<td>" + thousandSeparator(car.volume) + " ccm</td>";
-                                    carsToInput += "<td>" + car.power + " kW</td>";
-                                    carsToInput += "<td>" + thousandSeparator(car.mileage) + " km</td>";
-                                    carsToInput += "<td>" + car.manufacture_year + "</td>";
-                                    carsToInput += "<td>" + car.top_speed + " km/h</td>";
-                                    carsToInput += "<td>" + car.acceleration + " s</td>";
-                                    carsToInput += "<td>" + thousandSeparator(car.price) + " Kč</td>";
-                                    carsToInput += "</tr>";
-                                })
-                            },
-                            error: function (xhr) {
-                                $("#send-form").html("<span id='glyph-loading'></span>Vyhledat").removeClass("disabled");
-                                $("#alert-danger").text("Požadavek nelze zpracovat - " + xhr.responseText);
-                                $("#alert-danger").show();
-                            }
-                        })
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/find-cars/",
+                        dataType: "json",
+                        data: $("#fagin-form").serialize(),
+                        success: function (data) {
+                            endTime = new Date().getTime() - startTime;
+                            $.each(data, function (index, car) {
+                                carsToInput += "<tr>";
+                                carsToInput += "<td><a href='/car/" + car.id + "/'>" + car.name + "</a></td>";
+                                carsToInput += "<td>" + thousandSeparator(car.volume) + " ccm</td>";
+                                carsToInput += "<td>" + car.power + " kW</td>";
+                                carsToInput += "<td>" + thousandSeparator(car.mileage) + " km</td>";
+                                carsToInput += "<td>" + car.manufacture_year + "</td>";
+                                carsToInput += "<td>" + car.top_speed + " km/h</td>";
+                                carsToInput += "<td>" + car.acceleration + " s</td>";
+                                carsToInput += "<td>" + thousandSeparator(car.price) + " Kč</td>";
+                                carsToInput += "</tr>";
+                            })
+                        },
+                        error: function (xhr) {
+                            $("#send-form").html("<span id='glyph-loading'></span>Vyhledat").removeClass("disabled");
+                            $("#alert-danger").text("Požadavek nelze zpracovat - " + xhr.responseText);
+                            $("#alert-danger").show();
+                        }
+                    })
                 ).done(function () {
                     $("#cars-tbody").append($(carsToInput));
                     $("#alert-info").text("Načteno za " + endTime + " milisekund.").show();

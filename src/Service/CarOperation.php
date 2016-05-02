@@ -27,7 +27,7 @@ class CarOperation {
     }
 
     /**
-     * Vytvori entitu Car
+     * Vytvori entitu Car.
      *
      * @param $name
      * @param $volume
@@ -53,21 +53,14 @@ class CarOperation {
     }
 
     /**
-     * Vlozi auto do DB a pripadne normalizuje tabulky.
+     * Vlozi auto do DB.
      *
-     * @param bool $normalize
-     * @param Car  $car
+     * @param Car $car
      * @return int|null
      */
-    public function insertCar(Car $car, $normalize = false) {
-
+    public function insertCar(Car $car) {
         $this->validateCar($car);
         $car_id = $this->database->insertCar($car);
-
-        if ($normalize and preg_match("/^\d*/", $car_id)) {
-            $this->normalizeCarsToDb();
-        }
-
         return $car_id;
     }
 
