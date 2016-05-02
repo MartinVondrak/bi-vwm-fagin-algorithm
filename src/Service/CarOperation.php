@@ -56,6 +56,7 @@ class CarOperation {
      * Vlozi auto do DB a pripadne normalizuje tabulky.
      *
      * @param bool $normalize
+     * @param Car  $car
      * @return int|null
      */
     public function insertCar(Car $car, $normalize = false) {
@@ -63,7 +64,7 @@ class CarOperation {
         $this->validateCar($car);
         $car_id = $this->database->insertCar($car);
 
-        if ($normalize and preg_match("/^\d*/",$car_id)) {
+        if ($normalize and preg_match("/^\d*/", $car_id)) {
             $this->normalizeCarsToDb();
         }
 
@@ -153,7 +154,7 @@ class CarOperation {
      * @param Car[]    $cars
      * @param string[] $params
      * @return array
-     * @throws \Fagin\Exception\InvalidParamException
+     * @throws InvalidParamException
      */
     public function normalizeCarsToArray($cars, $params) {
         $normalizedCars = array();
@@ -177,7 +178,7 @@ class CarOperation {
     }
 
     /**
-     * Zvaliduje entitu Car
+     * Zvaliduje entitu Car.
      *
      * @param Car $car
      * @throws InvalidParamException
@@ -186,32 +187,38 @@ class CarOperation {
         if (empty($car->getName())) {
             throw new InvalidParamException("Invalid name.");
         }
-        if (empty($car->getVolume()) || !preg_match("/^\d*$/",$car->getVolume())) {
-            var_dump($car->getVolume());
+
+        if (empty($car->getVolume()) || !preg_match("/^\d*$/", $car->getVolume())) {
             throw new InvalidParamException("Invalid volume.");
         }
-        if (empty($car->getPower()) || !preg_match("/^\d*$/",$car->getPower())) {
+
+        if (empty($car->getPower()) || !preg_match("/^\d*$/", $car->getPower())) {
             throw new InvalidParamException("Invalid power.");
         }
-        if (empty($car->getMileage()) || !preg_match("/^\d*$/",$car->getMileage())) {
+
+        if (empty($car->getMileage()) || !preg_match("/^\d*$/", $car->getMileage())) {
             throw new InvalidParamException("Invalid mileage.");
         }
-        if (empty($car->getManufactureYear()) || !preg_match("/^\d*$/",$car->getManufactureYear())) {
+
+        if (empty($car->getManufactureYear()) || !preg_match("/^\d*$/", $car->getManufactureYear())) {
             throw new InvalidParamException("Invalid manufacture year.");
         }
-        if (empty($car->getTopSpeed()) || !preg_match("/^\d*$/",$car->getTopSpeed())) {
+
+        if (empty($car->getTopSpeed()) || !preg_match("/^\d*$/", $car->getTopSpeed())) {
             throw new InvalidParamException("Invalid top speed.");
         }
-        if (empty($car->getAcceleration()) || !preg_match("/^\d*\.?\d*$/",$car->getAcceleration())) {
+
+        if (empty($car->getAcceleration()) || !preg_match("/^\d*\.?\d*$/", $car->getAcceleration())) {
             throw new InvalidParamException("Invalid acceleration.");
         }
-        if (empty($car->getPrice()) || !preg_match("/^\d*$/",$car->getPrice())) {
+
+        if (empty($car->getPrice()) || !preg_match("/^\d*$/", $car->getPrice())) {
             throw new InvalidParamException("Invalid price.");
         }
     }
 
     /**
-     * Otestuje vstup
+     * Otestuje vstup.
      *
      * @param $data
      * @return string

@@ -29,15 +29,11 @@ class FaginSearchService extends AbstractSearchService {
      */
     public function getKProductsWithParams($params, $k, $aggregation) {
         $this->timeLogger->logMessage('--------- FAGIN ---------');
-        $this->timeLogger->start();
         $k = $this->validateTopK($k);
-        $this->timeLogger->stop('Validation of top K');
         $this->timeLogger->start();
         $normalizedTables = $this->getNormalizedTablesForParams($params);
         $this->timeLogger->stop('Getting normalized table for params: ' . implode(', ', $params) . '.');
-        $this->timeLogger->start();
         $carsForAggregation = $this->getProductsForAggregation($normalizedTables, $k, count($params), $params);
-        $this->timeLogger->stop('Return from getProductsForAggregation');
         $sortedCars = $this->aggregateAndSortProducts($carsForAggregation, $aggregation);
         $this->timeLogger->start();
         $cars = $this->getTopKCars($sortedCars, $k);
@@ -55,21 +51,24 @@ class FaginSearchService extends AbstractSearchService {
      * @return array
      */
     private function getProductsForAggregation($tables, $k, $paramCount, $params) {
-        $this->timeLogger->stop('Call getProductsForAggregation');
         $carArray = array();
         $carFound = 0;
-        $index = 0;
+        /** @var \ArrayIterator[] $iterators */
+        $iterators = array();
 
         if (empty($tables)) {
             return $carArray;
+        }
+
+        foreach ($tables as $param => $table) {
+            $iterators[$param] = $table->getIterator();
         }
 
         $this->timeLogger->start();
 
         while ($carFound < $k) {
             foreach ($tables as $param => $table) {
-                $it = $table->getIterator();
-                $it->seek($index);
+                $it = $iterators[$param];
 
                 if (!isset($carArray[$it->key()])) {
                     $carArray[$it->key()] = array();
@@ -81,12 +80,13 @@ class FaginSearchService extends AbstractSearchService {
                 if (count($carArray[$it->key()]) == $paramCount) {
                     $carFound++;
                 }
-            }
 
-            $index++;
+                $iterators[$param]->next();
+            }
         }
 
         $this->timeLogger->stop('Getting ' . $k . ' complete products.');
+        $this->timeLogger->logMessage('Got ' . count($carArray) . ' incomplete cars');
         $this->timeLogger->start();
 
         foreach ($params as $param) {
@@ -98,7 +98,6 @@ class FaginSearchService extends AbstractSearchService {
         }
 
         $this->timeLogger->stop('Getting cross links');
-        $this->timeLogger->start();
         return $carArray;
     }
 

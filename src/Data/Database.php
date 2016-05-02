@@ -56,14 +56,20 @@ class Database {
      * Vraci auta podle zadaneho pole s ID.
      *
      * @param array $ids
+     * @param bool  $associative
      * @return Car[]
      */
-    public function fetchCarByIds($ids) {
+    public function fetchCarByIds($ids, $associative = false) {
         $query = $this->database->prepare('SELECT * FROM `car` WHERE `id` IN (' . str_repeat('?, ', count($ids) - 1) . '?)');
-        $query->setFetchMode(PDO::FETCH_CLASS, 'Fagin\Data\Car');
+
+        if ($associative) {
+            $query->setFetchMode(PDO::FETCH_ASSOC);
+        } else {
+            $query->setFetchMode(PDO::FETCH_CLASS, 'Fagin\Data\Car');
+        }
+
         $query->execute($ids);
-        $cars = $query->fetchAll();
-        return $cars;
+        return $query->fetchAll();
     }
 
     /**

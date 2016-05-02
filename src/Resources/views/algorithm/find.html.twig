@@ -213,9 +213,9 @@
                 $("#alert-info").hide();
                 $("#alert-danger").hide();
 
-                var startTime = new Date().getTime();
-
                 var carsToInput = '';
+                var endTime;
+                var startTime = new Date().getTime();
 
                 $.when(
                         $.ajax({
@@ -224,6 +224,7 @@
                             dataType: "json",
                             data: $("#fagin-form").serialize(),
                             success: function (data) {
+                                endTime = new Date().getTime() - startTime;
                                 $.each(data, function (index, car) {
                                     carsToInput += "<tr>";
                                     carsToInput += "<td><a href='/car/" + car.id + "/'>" + car.name + "</a></td>";
@@ -244,7 +245,6 @@
                             }
                         })
                 ).done(function () {
-                    var endTime = new Date().getTime() - startTime;
                     $("#cars-tbody").append($(carsToInput));
                     $("#alert-info").text("Načteno za " + endTime + " milisekund.").show();
                     $("#send-form").html("<span id='glyph-loading'></span>Vyhledat").removeClass("disabled");

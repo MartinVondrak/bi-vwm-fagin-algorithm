@@ -38,8 +38,8 @@ class LinearSearchService extends AbstractSearchService {
      * @throws InvalidTopKException
      */
     public function getKProductsWithParams($params, $k, $aggregation) {
-        $k = $this->validateTopK($k);
         $this->timeLogger->logMessage('--------- LINEAR ---------');
+        $k = $this->validateTopK($k);
         $this->timeLogger->start();
         $cars = $this->database->fetchAllCars();
         $this->timeLogger->stop('Get all cars.');

@@ -76,7 +76,7 @@ abstract class AbstractSearchService {
      * @throws InvalidAggregationFunctionException
      * @throws InvalidParamException
      */
-    protected function aggregateAndSortProducts($cars, $aggregationFunction) {
+    protected function aggregateAndSortProducts(&$cars, $aggregationFunction) {
         $this->timeLogger->start();
 
         foreach ($cars as $id => $params) {
@@ -112,7 +112,7 @@ abstract class AbstractSearchService {
      * @param int   $k
      * @return Car[]
      */
-    protected function getTopKCars($sorted, $k) {
+    protected function getTopKCars(&$sorted, $k) {
         $carIds = array();
         reset($sorted);
 
@@ -121,7 +121,8 @@ abstract class AbstractSearchService {
             next($sorted);
         }
 
-        return $this->database->fetchCarByIds($carIds);
+        $cars = $this->database->fetchCarByIds($carIds, true);
+        return $cars;
     }
 
     /**
