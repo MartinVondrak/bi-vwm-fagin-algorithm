@@ -113,15 +113,15 @@ abstract class AbstractSearchService {
      * @return Car[]
      */
     protected function getTopKCars(&$sorted, $k) {
-        $carIds = array();
         reset($sorted);
+        $allCars = $this->database->fetchAllCars();
+        $cars = array();
 
         for ($i = 0; $i < $k; $i++) {
-            $carIds[] = key($sorted);
+            $cars[] = $allCars[key($sorted) - 1];
             next($sorted);
         }
 
-        $cars = $this->database->fetchCarByIds($carIds, true);
         return $cars;
     }
 

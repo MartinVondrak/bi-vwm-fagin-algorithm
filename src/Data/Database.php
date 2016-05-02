@@ -78,7 +78,7 @@ class Database {
      * @return Car[]
      */
     public function fetchAllCars() {
-        $query = $this->database->prepare('SELECT * FROM `car`');
+        $query = $this->database->prepare('SELECT * FROM `car` ORDER BY `id`');
         $query->setFetchMode(PDO::FETCH_CLASS, 'Fagin\Data\Car');
         $query->execute();
         $cars = $query->fetchAll();
