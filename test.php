@@ -18,3 +18,5 @@ $cars = $fakin->getKProductsWithParams(array(Car::VOLUME, Car::POWER), 3200, \Fa
 print '<pre>';
 var_dump($cars);
 print '</pre>';
+$carOp = new \Fagin\Service\CarOperation();
+$carOp->normalizeCarsToDb();

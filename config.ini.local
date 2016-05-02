@@ -1,0 +1,9 @@
+; Configuration file for our application
+
+[database]
+type = "mysql"
+host = "localhost"
+username = "root"
+password = "Deb1an"
+name = "fagin"
+charset = "utf8"

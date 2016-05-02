@@ -28,12 +28,16 @@ class FaginSearchService extends AbstractSearchService {
      * @throws InvalidTopKException;
      */
     public function getKProductsWithParams($params, $k, $aggregation) {
-        $k = $this->validateTopK($k);
         $this->timeLogger->logMessage('--------- FAGIN ---------');
+        $this->timeLogger->start();
+        $k = $this->validateTopK($k);
+        $this->timeLogger->stop('Validation of top K');
         $this->timeLogger->start();
         $normalizedTables = $this->getNormalizedTablesForParams($params);
         $this->timeLogger->stop('Getting normalized table for params: ' . implode(', ', $params) . '.');
+        $this->timeLogger->start();
         $carsForAggregation = $this->getProductsForAggregation($normalizedTables, $k, count($params), $params);
+        $this->timeLogger->stop('Return from getProductsForAggregation');
         $sortedCars = $this->aggregateAndSortProducts($carsForAggregation, $aggregation);
         $this->timeLogger->start();
         $cars = $this->getTopKCars($sortedCars, $k);
@@ -51,6 +55,7 @@ class FaginSearchService extends AbstractSearchService {
      * @return array
      */
     private function getProductsForAggregation($tables, $k, $paramCount, $params) {
+        $this->timeLogger->stop('Call getProductsForAggregation');
         $carArray = array();
         $carFound = 0;
         $index = 0;
@@ -93,6 +98,7 @@ class FaginSearchService extends AbstractSearchService {
         }
 
         $this->timeLogger->stop('Getting cross links');
+        $this->timeLogger->start();
         return $carArray;
     }
 
