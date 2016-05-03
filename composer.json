@@ -2,7 +2,20 @@
   "name": "vondrm12/bi-vwm-fagin-algorithm",
   "description": "Semestral project for subject BI-VWM (Searching Web and Multimedia Databases). The application implements Fagin top(k) algorithm.",
   "license": "proprietary",
+  "authors": [
+    {
+      "name": "Michal Pech",
+      "email": "pechmich@fit.cvut.cz",
+      "role": "Developer"
+    },
+    {
+      "name": "Martin Vondrak",
+      "email": "vondrm12@fit.cvut.cz",
+      "role": "Developer"
+    }
+  ],
   "require": {
+    "php": "5.6.*",
     "twig/twig": "~1.0",
     "twbs/bootstrap": "~3.0",
     "components/jquery": "~1.12"
