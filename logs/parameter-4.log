@@ -1,0 +1,188 @@
+[03-05-2016 02:30:33] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[03-05-2016 02:30:33] EVENT (127.0.0.1) 540.087ms Getting normalized table for params: volume, power, top_speed, acceleration.
+[03-05-2016 02:30:33] EVENT (127.0.0.1) 0.52ms Getting 10 complete products.
+[03-05-2016 02:30:33] MESSAGE (127.0.0.1) Got 125 incomplete cars
+[03-05-2016 02:30:33] EVENT (127.0.0.1) 0.235ms Getting cross links
+[03-05-2016 02:30:33] EVENT (127.0.0.1) 0.141ms Calculating aggregated values
+[03-05-2016 02:30:33] EVENT (127.0.0.1) 0.225ms Sorting cars
+[03-05-2016 02:30:34] EVENT (127.0.0.1) 334.256ms Get final top 10 products.
+[03-05-2016 02:30:41] MESSAGE (127.0.0.1) --------- LINEAR ---------
+[03-05-2016 02:30:41] EVENT (127.0.0.1) 313.388ms Get all cars.
+[03-05-2016 02:30:42] EVENT (127.0.0.1) 1070.714ms Normalize all cars.
+[03-05-2016 02:30:42] EVENT (127.0.0.1) 58.332ms Calculating aggregated values
+[03-05-2016 02:30:43] EVENT (127.0.0.1) 959.355ms Sorting cars
+[03-05-2016 02:30:44] EVENT (127.0.0.1) 382.033ms Get final top 10 products.
+[03-05-2016 02:30:54] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[03-05-2016 02:30:55] EVENT (127.0.0.1) 522.517ms Getting normalized table for params: volume, power, top_speed, acceleration.
+[03-05-2016 02:30:55] EVENT (127.0.0.1) 0.71ms Getting 20 complete products.
+[03-05-2016 02:30:55] MESSAGE (127.0.0.1) Got 171 incomplete cars
+[03-05-2016 02:30:55] EVENT (127.0.0.1) 0.31ms Getting cross links
+[03-05-2016 02:30:55] EVENT (127.0.0.1) 0.187ms Calculating aggregated values
+[03-05-2016 02:30:55] EVENT (127.0.0.1) 0.316ms Sorting cars
+[03-05-2016 02:30:55] EVENT (127.0.0.1) 339.716ms Get final top 20 products.
+[03-05-2016 02:31:02] MESSAGE (127.0.0.1) --------- LINEAR ---------
+[03-05-2016 02:31:02] EVENT (127.0.0.1) 304.174ms Get all cars.
+[03-05-2016 02:31:03] EVENT (127.0.0.1) 1085.348ms Normalize all cars.
+[03-05-2016 02:31:04] EVENT (127.0.0.1) 59.23ms Calculating aggregated values
+[03-05-2016 02:31:05] EVENT (127.0.0.1) 973.237ms Sorting cars
+[03-05-2016 02:31:05] EVENT (127.0.0.1) 382.318ms Get final top 20 products.
+[03-05-2016 02:31:13] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[03-05-2016 02:31:14] EVENT (127.0.0.1) 519.881ms Getting normalized table for params: volume, power, top_speed, acceleration.
+[03-05-2016 02:31:14] EVENT (127.0.0.1) 1.296ms Getting 50 complete products.
+[03-05-2016 02:31:14] MESSAGE (127.0.0.1) Got 290 incomplete cars
+[03-05-2016 02:31:14] EVENT (127.0.0.1) 0.493ms Getting cross links
+[03-05-2016 02:31:14] EVENT (127.0.0.1) 0.328ms Calculating aggregated values
+[03-05-2016 02:31:14] EVENT (127.0.0.1) 0.707ms Sorting cars
+[03-05-2016 02:31:14] EVENT (127.0.0.1) 331.284ms Get final top 50 products.
+[03-05-2016 02:31:23] MESSAGE (127.0.0.1) --------- LINEAR ---------
+[03-05-2016 02:31:23] EVENT (127.0.0.1) 301.93ms Get all cars.
+[03-05-2016 02:31:24] EVENT (127.0.0.1) 1072.142ms Normalize all cars.
+[03-05-2016 02:31:24] EVENT (127.0.0.1) 58.447ms Calculating aggregated values
+[03-05-2016 02:31:25] EVENT (127.0.0.1) 992.646ms Sorting cars
+[03-05-2016 02:31:26] EVENT (127.0.0.1) 382.782ms Get final top 50 products.
+[03-05-2016 02:31:34] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[03-05-2016 02:31:35] EVENT (127.0.0.1) 529.49ms Getting normalized table for params: volume, power, top_speed, acceleration.
+[03-05-2016 02:31:35] EVENT (127.0.0.1) 2.302ms Getting 100 complete products.
+[03-05-2016 02:31:35] MESSAGE (127.0.0.1) Got 483 incomplete cars
+[03-05-2016 02:31:35] EVENT (127.0.0.1) 0.973ms Getting cross links
+[03-05-2016 02:31:35] EVENT (127.0.0.1) 0.615ms Calculating aggregated values
+[03-05-2016 02:31:35] EVENT (127.0.0.1) 1.348ms Sorting cars
+[03-05-2016 02:31:35] EVENT (127.0.0.1) 335.112ms Get final top 100 products.
+[03-05-2016 02:31:41] MESSAGE (127.0.0.1) --------- LINEAR ---------
+[03-05-2016 02:31:41] EVENT (127.0.0.1) 287.694ms Get all cars.
+[03-05-2016 02:31:42] EVENT (127.0.0.1) 1077.503ms Normalize all cars.
+[03-05-2016 02:31:42] EVENT (127.0.0.1) 59.027ms Calculating aggregated values
+[03-05-2016 02:31:43] EVENT (127.0.0.1) 973.934ms Sorting cars
+[03-05-2016 02:31:44] EVENT (127.0.0.1) 381.839ms Get final top 100 products.
+[03-05-2016 02:31:52] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[03-05-2016 02:31:53] EVENT (127.0.0.1) 510.88ms Getting normalized table for params: volume, power, top_speed, acceleration.
+[03-05-2016 02:31:53] EVENT (127.0.0.1) 3.577ms Getting 200 complete products.
+[03-05-2016 02:31:53] MESSAGE (127.0.0.1) Got 795 incomplete cars
+[03-05-2016 02:31:53] EVENT (127.0.0.1) 1.297ms Getting cross links
+[03-05-2016 02:31:53] EVENT (127.0.0.1) 0.935ms Calculating aggregated values
+[03-05-2016 02:31:53] EVENT (127.0.0.1) 2.638ms Sorting cars
+[03-05-2016 02:31:53] EVENT (127.0.0.1) 339.953ms Get final top 200 products.
+[03-05-2016 02:31:59] MESSAGE (127.0.0.1) --------- LINEAR ---------
+[03-05-2016 02:32:00] EVENT (127.0.0.1) 296.822ms Get all cars.
+[03-05-2016 02:32:01] EVENT (127.0.0.1) 1071.861ms Normalize all cars.
+[03-05-2016 02:32:01] EVENT (127.0.0.1) 57.859ms Calculating aggregated values
+[03-05-2016 02:32:02] EVENT (127.0.0.1) 994.236ms Sorting cars
+[03-05-2016 02:32:02] EVENT (127.0.0.1) 381.997ms Get final top 200 products.
+[03-05-2016 02:32:24] MESSAGE (127.0.0.1) --------- LINEAR ---------
+[03-05-2016 02:32:25] EVENT (127.0.0.1) 293.065ms Get all cars.
+[03-05-2016 02:32:26] EVENT (127.0.0.1) 1075.989ms Normalize all cars.
+[03-05-2016 02:32:26] EVENT (127.0.0.1) 57.865ms Calculating aggregated values
+[03-05-2016 02:32:27] EVENT (127.0.0.1) 989.72ms Sorting cars
+[03-05-2016 02:32:27] EVENT (127.0.0.1) 384.917ms Get final top 500 products.
+[03-05-2016 02:32:34] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[03-05-2016 02:32:34] EVENT (127.0.0.1) 528.104ms Getting normalized table for params: volume, power, top_speed, acceleration.
+[03-05-2016 02:32:34] EVENT (127.0.0.1) 6.989ms Getting 500 complete products.
+[03-05-2016 02:32:34] MESSAGE (127.0.0.1) Got 1330 incomplete cars
+[03-05-2016 02:32:34] EVENT (127.0.0.1) 2.404ms Getting cross links
+[03-05-2016 02:32:34] EVENT (127.0.0.1) 1.591ms Calculating aggregated values
+[03-05-2016 02:32:34] EVENT (127.0.0.1) 4.62ms Sorting cars
+[03-05-2016 02:32:34] EVENT (127.0.0.1) 334.475ms Get final top 500 products.
+[03-05-2016 02:32:42] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[03-05-2016 02:32:43] EVENT (127.0.0.1) 526.077ms Getting normalized table for params: volume, power, top_speed, acceleration.
+[03-05-2016 02:32:43] EVENT (127.0.0.1) 12.618ms Getting 1000 complete products.
+[03-05-2016 02:32:43] MESSAGE (127.0.0.1) Got 2436 incomplete cars
+[03-05-2016 02:32:43] EVENT (127.0.0.1) 4.056ms Getting cross links
+[03-05-2016 02:32:43] EVENT (127.0.0.1) 2.806ms Calculating aggregated values
+[03-05-2016 02:32:43] EVENT (127.0.0.1) 10.561ms Sorting cars
+[03-05-2016 02:32:43] EVENT (127.0.0.1) 332.665ms Get final top 1000 products.
+[03-05-2016 02:32:49] MESSAGE (127.0.0.1) --------- LINEAR ---------
+[03-05-2016 02:32:50] EVENT (127.0.0.1) 296.442ms Get all cars.
+[03-05-2016 02:32:51] EVENT (127.0.0.1) 1073.293ms Normalize all cars.
+[03-05-2016 02:32:51] EVENT (127.0.0.1) 59.559ms Calculating aggregated values
+[03-05-2016 02:32:52] EVENT (127.0.0.1) 1006.176ms Sorting cars
+[03-05-2016 02:32:52] EVENT (127.0.0.1) 386.512ms Get final top 1000 products.
+[03-05-2016 02:33:01] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[03-05-2016 02:33:01] EVENT (127.0.0.1) 507.798ms Getting normalized table for params: volume, power, top_speed, acceleration.
+[03-05-2016 02:33:01] EVENT (127.0.0.1) 34.373ms Getting 2000 complete products.
+[03-05-2016 02:33:01] MESSAGE (127.0.0.1) Got 6454 incomplete cars
+[03-05-2016 02:33:01] EVENT (127.0.0.1) 20.438ms Getting cross links
+[03-05-2016 02:33:01] EVENT (127.0.0.1) 12.085ms Calculating aggregated values
+[03-05-2016 02:33:01] EVENT (127.0.0.1) 37.273ms Sorting cars
+[03-05-2016 02:33:02] EVENT (127.0.0.1) 331.526ms Get final top 2000 products.
+[03-05-2016 02:33:08] MESSAGE (127.0.0.1) --------- LINEAR ---------
+[03-05-2016 02:33:09] EVENT (127.0.0.1) 308.882ms Get all cars.
+[03-05-2016 02:33:10] EVENT (127.0.0.1) 1075.033ms Normalize all cars.
+[03-05-2016 02:33:10] EVENT (127.0.0.1) 59.513ms Calculating aggregated values
+[03-05-2016 02:33:11] EVENT (127.0.0.1) 989.557ms Sorting cars
+[03-05-2016 02:33:11] EVENT (127.0.0.1) 497.69ms Get final top 2000 products.
+[03-05-2016 02:33:24] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[03-05-2016 02:33:24] EVENT (127.0.0.1) 513.813ms Getting normalized table for params: volume, power, top_speed, acceleration.
+[03-05-2016 02:33:24] EVENT (127.0.0.1) 46.717ms Getting 3000 complete products.
+[03-05-2016 02:33:24] MESSAGE (127.0.0.1) Got 8346 incomplete cars
+[03-05-2016 02:33:24] EVENT (127.0.0.1) 27.927ms Getting cross links
+[03-05-2016 02:33:24] EVENT (127.0.0.1) 15.044ms Calculating aggregated values
+[03-05-2016 02:33:24] EVENT (127.0.0.1) 48.56ms Sorting cars
+[03-05-2016 02:33:25] EVENT (127.0.0.1) 368.31ms Get final top 3000 products.
+[03-05-2016 02:33:34] MESSAGE (127.0.0.1) --------- LINEAR ---------
+[03-05-2016 02:33:35] EVENT (127.0.0.1) 291.871ms Get all cars.
+[03-05-2016 02:33:36] EVENT (127.0.0.1) 1070.049ms Normalize all cars.
+[03-05-2016 02:33:36] EVENT (127.0.0.1) 59.982ms Calculating aggregated values
+[03-05-2016 02:33:37] EVENT (127.0.0.1) 974.97ms Sorting cars
+[03-05-2016 02:33:37] EVENT (127.0.0.1) 497.826ms Get final top 3000 products.
+[03-05-2016 02:34:35] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[03-05-2016 02:34:36] EVENT (127.0.0.1) 532.455ms Getting normalized table for params: volume, power, top_speed, acceleration.
+[03-05-2016 02:34:36] EVENT (127.0.0.1) 61.62ms Getting 5000 complete products.
+[03-05-2016 02:34:36] MESSAGE (127.0.0.1) Got 9724 incomplete cars
+[03-05-2016 02:34:36] EVENT (127.0.0.1) 30.917ms Getting cross links
+[03-05-2016 02:34:36] EVENT (127.0.0.1) 18.036ms Calculating aggregated values
+[03-05-2016 02:34:36] EVENT (127.0.0.1) 64.527ms Sorting cars
+[03-05-2016 02:34:36] EVENT (127.0.0.1) 375.378ms Get final top 5000 products.
+[03-05-2016 02:34:45] MESSAGE (127.0.0.1) --------- LINEAR ---------
+[03-05-2016 02:34:46] EVENT (127.0.0.1) 293.652ms Get all cars.
+[03-05-2016 02:34:47] EVENT (127.0.0.1) 1070.999ms Normalize all cars.
+[03-05-2016 02:34:47] EVENT (127.0.0.1) 57.79ms Calculating aggregated values
+[03-05-2016 02:34:48] EVENT (127.0.0.1) 966.816ms Sorting cars
+[03-05-2016 02:34:48] EVENT (127.0.0.1) 498.932ms Get final top 5000 products.
+[03-05-2016 02:35:15] MESSAGE (127.0.0.1) --------- LINEAR ---------
+[03-05-2016 02:35:16] EVENT (127.0.0.1) 314.145ms Get all cars.
+[03-05-2016 02:35:17] EVENT (127.0.0.1) 1075.191ms Normalize all cars.
+[03-05-2016 02:35:17] EVENT (127.0.0.1) 58.726ms Calculating aggregated values
+[03-05-2016 02:35:18] EVENT (127.0.0.1) 972.83ms Sorting cars
+[03-05-2016 02:35:18] EVENT (127.0.0.1) 502.38ms Get final top 3000 products.
+[03-05-2016 02:35:36] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[03-05-2016 02:35:36] EVENT (127.0.0.1) 511.062ms Getting normalized table for params: volume, power, top_speed, acceleration.
+[03-05-2016 02:35:37] EVENT (127.0.0.1) 140.166ms Getting 10000 complete products.
+[03-05-2016 02:35:37] MESSAGE (127.0.0.1) Got 12353 incomplete cars
+[03-05-2016 02:35:37] EVENT (127.0.0.1) 126.963ms Getting cross links
+[03-05-2016 02:35:37] EVENT (127.0.0.1) 21.264ms Calculating aggregated values
+[03-05-2016 02:35:37] EVENT (127.0.0.1) 118.849ms Sorting cars
+[03-05-2016 02:35:37] EVENT (127.0.0.1) 344.113ms Get final top 10000 products.
+[03-05-2016 02:35:54] MESSAGE (127.0.0.1) --------- LINEAR ---------
+[03-05-2016 02:35:54] EVENT (127.0.0.1) 294.244ms Get all cars.
+[03-05-2016 02:35:55] EVENT (127.0.0.1) 1069.572ms Normalize all cars.
+[03-05-2016 02:35:55] EVENT (127.0.0.1) 58.052ms Calculating aggregated values
+[03-05-2016 02:35:56] EVENT (127.0.0.1) 981.545ms Sorting cars
+[03-05-2016 02:35:57] EVENT (127.0.0.1) 497.002ms Get final top 10000 products.
+[03-05-2016 02:36:13] MESSAGE (127.0.0.1) --------- LINEAR ---------
+[03-05-2016 02:36:13] EVENT (127.0.0.1) 285.047ms Get all cars.
+[03-05-2016 02:36:14] EVENT (127.0.0.1) 1072.156ms Normalize all cars.
+[03-05-2016 02:36:14] EVENT (127.0.0.1) 60.175ms Calculating aggregated values
+[03-05-2016 02:36:15] EVENT (127.0.0.1) 987.492ms Sorting cars
+[03-05-2016 02:36:16] EVENT (127.0.0.1) 514.736ms Get final top 20000 products.
+[03-05-2016 02:36:32] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[03-05-2016 02:36:33] EVENT (127.0.0.1) 525.801ms Getting normalized table for params: volume, power, top_speed, acceleration.
+[03-05-2016 02:36:33] EVENT (127.0.0.1) 345.804ms Getting 20000 complete products.
+[03-05-2016 02:36:33] MESSAGE (127.0.0.1) Got 28168 incomplete cars
+[03-05-2016 02:36:33] EVENT (127.0.0.1) 261.814ms Getting cross links
+[03-05-2016 02:36:33] EVENT (127.0.0.1) 52.824ms Calculating aggregated values
+[03-05-2016 02:36:34] EVENT (127.0.0.1) 308.537ms Sorting cars
+[03-05-2016 02:36:34] EVENT (127.0.0.1) 373.735ms Get final top 20000 products.
+[03-05-2016 02:36:52] MESSAGE (127.0.0.1) --------- FAGIN ---------
+[03-05-2016 02:36:52] EVENT (127.0.0.1) 522.566ms Getting normalized table for params: volume, power, top_speed, acceleration.
+[03-05-2016 02:36:53] EVENT (127.0.0.1) 726.529ms Getting 40000 complete products.
+[03-05-2016 02:36:53] MESSAGE (127.0.0.1) Got 49504 incomplete cars
+[03-05-2016 02:36:54] EVENT (127.0.0.1) 449.751ms Getting cross links
+[03-05-2016 02:36:54] EVENT (127.0.0.1) 93.305ms Calculating aggregated values
+[03-05-2016 02:36:54] EVENT (127.0.0.1) 627.717ms Sorting cars
+[03-05-2016 02:36:55] EVENT (127.0.0.1) 417.414ms Get final top 40000 products.
+[03-05-2016 02:37:29] MESSAGE (127.0.0.1) --------- LINEAR ---------
+[03-05-2016 02:37:29] EVENT (127.0.0.1) 286.566ms Get all cars.
+[03-05-2016 02:37:30] EVENT (127.0.0.1) 1080.884ms Normalize all cars.
+[03-05-2016 02:37:30] EVENT (127.0.0.1) 59.267ms Calculating aggregated values
+[03-05-2016 02:37:31] EVENT (127.0.0.1) 986.83ms Sorting cars
+[03-05-2016 02:37:32] EVENT (127.0.0.1) 531.158ms Get final top 40000 products.

@@ -5,7 +5,7 @@
 vendor
 
 # Ignore logs folder
-logs
+logs/time.log
 
 # Ignore configuration files
 config.ini
